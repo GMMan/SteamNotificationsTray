@@ -1,6 +1,6 @@
 ﻿namespace SteamNotificationsTray
 {
-    partial class Form1
+    partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
