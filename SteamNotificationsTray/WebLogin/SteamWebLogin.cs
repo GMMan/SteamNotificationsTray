@@ -81,6 +81,20 @@ namespace SteamNotificationsTray.WebLogin
             }
         }
 
+        public string GetRenderCaptchaUrl(long gid)
+        {
+            string query;
+            using (var p = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string, string>("gid", gid.ToString())
+            }))
+            {
+                query = p.ReadAsStringAsync().Result;
+            }
+            UriBuilder builder = new UriBuilder(RenderCaptchaPath);
+            builder.Query = query;
+            return builder.Uri.ToString();
+        }
+
         public async Task<byte[]> RenderCaptchaAsync(long gid)
         {
             string query;
