@@ -295,6 +295,8 @@ namespace SteamNotificationsTray
         {
             loginResponse = null;
             updateGuiFromResponse();
+            messageLabel.Text = string.Empty;
+            messageLabel.Visible = false;
         }
     }
 }
