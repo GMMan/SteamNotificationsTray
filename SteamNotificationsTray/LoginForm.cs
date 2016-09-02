@@ -196,13 +196,13 @@ namespace SteamNotificationsTray
             return true;
         }
 
-        async void loadNewCaptcha()
+        async Task loadNewCaptcha()
         {
             if (loginResponse == null) return;
             await Task.Run(() => captchaPictureBox.LoadAsync(loginClient.GetRenderCaptchaUrl(loginResponse.CaptchaGid)));
         }
 
-        async void refreshCaptcha()
+        async Task refreshCaptcha()
         {
             if (loginResponse == null) return;
             loginResponse.CaptchaGid = await loginClient.RefreshCaptchaAsync();
@@ -263,23 +263,16 @@ namespace SteamNotificationsTray
                         }
                         if (loginResponse.RequiresTwoFactor)
                             messageLabel.Text += "Mobile Authenticator code required. ";
-                        if (loginResponse.CaptchaNeeded)
-                        {
-                            if (loginResponse.IsBadCaptcha)
-                            {
-                                messageLabel.Text += "CAPTCHA entry required. ";
-                            }
-                            else
-                            {
-                                refreshCaptcha();
-                            }
-                        }
+                        if (loginResponse.CaptchaNeeded && !loginResponse.IsBadCaptcha)
+                            messageLabel.Text += "CAPTCHA entry required. ";
                         if (loginResponse.IsBadCaptcha)
                             messageLabel.Text += "CAPTCHA entry incorrect. ";
                         if (loginResponse.DeniedIpt)
                             messageLabel.Text += "Intel® Identity Protection Technology access denied. ";
                     }
                     messageLabel.Visible = messageLabel.Text.Length > 0;
+                    if (loginResponse != null && loginResponse.CaptchaNeeded)
+                        await loadNewCaptcha();
                 }
             }
             catch (Exception ex)
