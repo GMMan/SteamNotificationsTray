@@ -49,13 +49,13 @@ namespace SteamNotificationsTray
                             counts.TradeOffers = (int)notif.Value;
                             break;
                         case "2":
-                            counts.AsyncGame = (int)notif.Value;
+                            counts.AsyncGames = (int)notif.Value;
                             break;
                         case "3":
-                            counts.ModeratorMessage = (int)notif.Value;
+                            counts.ModeratorMessages = (int)notif.Value;
                             break;
                         case "10":
-                            counts.HelpRequestReply = (int)notif.Value;
+                            counts.HelpRequestReplies = (int)notif.Value;
                             break;
                     }
                     counts.TotalNotifications += (int)notif.Value;
