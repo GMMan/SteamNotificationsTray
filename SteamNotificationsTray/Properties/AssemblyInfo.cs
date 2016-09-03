@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SteamNotificationsTray")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Steam Notifications Tray App")]
+[assembly: AssemblyDescription("Displays Steam notification counts in the notification area.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SteamNotificationsTray")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCompany("GMWare")]
+[assembly: AssemblyProduct("Steam Notifications Tray App")]
+[assembly: AssemblyCopyright("Copyright © cyanic 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
