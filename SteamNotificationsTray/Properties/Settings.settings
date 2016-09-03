@@ -5,5 +5,17 @@
     <Setting Name="Credentials" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="InboxAvailableColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">92, 126, 16</Value>
+    </Setting>
+    <Setting Name="InboxNoneColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">0, 0, 0, 0</Value>
+    </Setting>
+    <Setting Name="InboxNewColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">158, 194, 29</Value>
+    </Setting>
+    <Setting Name="RefreshInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">30000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

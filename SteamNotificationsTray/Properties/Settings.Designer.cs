@@ -34,5 +34,53 @@ namespace SteamNotificationsTray.Properties {
                 this["Credentials"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("92, 126, 16")]
+        public global::System.Drawing.Color InboxAvailableColor {
+            get {
+                return ((global::System.Drawing.Color)(this["InboxAvailableColor"]));
+            }
+            set {
+                this["InboxAvailableColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Color InboxNoneColor {
+            get {
+                return ((global::System.Drawing.Color)(this["InboxNoneColor"]));
+            }
+            set {
+                this["InboxNoneColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("158, 194, 29")]
+        public global::System.Drawing.Color InboxNewColor {
+            get {
+                return ((global::System.Drawing.Color)(this["InboxNewColor"]));
+            }
+            set {
+                this["InboxNewColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30000")]
+        public int RefreshInterval {
+            get {
+                return ((int)(this["RefreshInterval"]));
+            }
+            set {
+                this["RefreshInterval"] = value;
+            }
+        }
     }
 }
