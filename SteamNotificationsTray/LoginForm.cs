@@ -95,7 +95,9 @@ namespace SteamNotificationsTray
                     Exponent = hexToBytes(rsaResponse.PublicKeyExp)
                 });
 
-                byte[] passwordBlob = Encoding.UTF8.GetBytes(passwordTextBox.Text);
+                // Filter password to ASCII characters (the login script does this)
+                string password = System.Text.RegularExpressions.Regex.Replace(passwordTextBox.Text, "[^\u0000-\u007F]", string.Empty);
+                byte[] passwordBlob = Encoding.UTF8.GetBytes(password);
                 byte[] crypted = rsa.Encrypt(passwordBlob, false);
                 encryptedPassword = Convert.ToBase64String(crypted);
             }
