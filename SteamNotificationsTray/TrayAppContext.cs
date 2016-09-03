@@ -78,6 +78,9 @@ namespace SteamNotificationsTray
             CookieContainer cookies = CredentialStore.GetCommunityCookies();
             client.SetCookies(cookies);
 
+            // Set main icon visible
+            mainIcon.Visible = true;
+
             // Set up timer and fire
             refreshTimer.Start();
             updateNotifications();
