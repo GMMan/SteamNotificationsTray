@@ -124,4 +124,7 @@
   <data name="NotificationDefault" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\graphics\inbox_notification_inactive.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="NotificationDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\graphics\inbox_notification_inactive_disabled.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

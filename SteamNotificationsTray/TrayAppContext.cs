@@ -43,13 +43,14 @@ namespace SteamNotificationsTray
             countIcon.Visible = true;
             countIcon.Visible = false;
             mainIcon.ContextMenu = appContextMenu;
-            mainIcon.Icon = IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize);
             mainIcon.Text = "Steam Notifications Tray App";
             mainIcon.Visible = true;
             mainIcon.Visible = false;
 
             mainIcon.Click += notifyIcon_Click;
+            mainIcon.DoubleClick += notifyIcon_DoubleClick;
             countIcon.Click += notifyIcon_Click;
+            countIcon.DoubleClick += notifyIcon_DoubleClick;
 
             // If no cookies available, show login form
             //CredentialStore.ClearCredentials();
@@ -88,6 +89,7 @@ namespace SteamNotificationsTray
             client.SetCookies(cookies);
 
             // Set main icon visible
+            ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
             mainIcon.Visible = true;
 
             // Set up timer and fire
@@ -165,7 +167,9 @@ namespace SteamNotificationsTray
             {
                 if (ex.Message.Contains("401"))
                 {
+                    // Login info expired
                     refreshTimer.Stop();
+                    ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDisabled, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
                     syncContext.Post(new System.Threading.SendOrPostCallback((o) => promptLogin()), null);
                 }
                 else
@@ -203,7 +207,12 @@ namespace SteamNotificationsTray
                 ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
             }
         }
-        
+
+        void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("steam://open/main");
+        }
+       
         protected override void ExitThreadCore()
         {
             mainIcon.Visible = false;
