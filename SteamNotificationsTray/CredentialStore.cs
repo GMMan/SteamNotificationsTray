@@ -37,7 +37,12 @@ namespace SteamNotificationsTray
 
         internal static void SaveTransferParameters(TransferParameters transferParams)
         {
-            string serialized = JsonConvert.SerializeObject(transferParams);
+            TransferParameters newParams = new TransferParameters
+            {
+                WebCookie = transferParams.WebCookie,
+                RememberLoginToken = transferParams.RememberLoginToken
+            };
+            string serialized = JsonConvert.SerializeObject(newParams);
             byte[] blob = Encoding.UTF8.GetBytes(serialized);
             byte[] cryptedBlob = ProtectedData.Protect(blob, GetStrongNameKey(), DataProtectionScope.CurrentUser);
             string cryptedParams = Convert.ToBase64String(cryptedBlob);
@@ -50,11 +55,9 @@ namespace SteamNotificationsTray
             TransferParameters transferParams = GetTransferParameters();
             if (transferParams == null) return null;
             CookieContainer cookies = new CookieContainer();
-            // 1. Session cookie
-            cookies.Add(new Cookie("steamLogin", WebUtility.HtmlEncode(string.Format("{0}||{1}", transferParams.SteamId, transferParams.Token)), "/", "steamcommunity.com"));
-            // 2. Secure session cookie
-            cookies.Add(new Cookie("steamLoginSecure", WebUtility.HtmlEncode(string.Format("{0}||{1}", transferParams.SteamId, transferParams.TokenSecure)), "/", "steamcommunity.com") { Secure = true });
-            // 3. Machine auth token
+            // 1. Persistent login cookie
+            cookies.Add(new Cookie("steamRememberLogin", WebUtility.HtmlEncode(string.Format("{0}||{1}", transferParams.SteamId, transferParams.RememberLoginToken)), "/", "steamcommunity.com"));
+            // 2. Machine auth token
             cookies.Add(new Cookie(string.Format("steamMachineAuth{0}", transferParams.SteamId), transferParams.WebCookie, "/", "steamcommunity.com") { Secure = true });
             return cookies;
         }
@@ -65,17 +68,11 @@ namespace SteamNotificationsTray
             if (transferParams == null) transferParams = new TransferParameters();
             foreach (Cookie cookie in cookies.GetCookies(new Uri("https://steamcommunity.com/")))
             {
-                if (cookie.Name == "steamLogin")
+                if (cookie.Name == "steamRememberLogin")
                 {
                     string[] bits = WebUtility.HtmlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
                     transferParams.SteamId = ulong.Parse(bits[0]);
-                    transferParams.Token = bits[1];
-                }
-                else if (cookie.Name == "steamLoginSecure")
-                {
-                    string[] bits = WebUtility.HtmlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
-                    transferParams.SteamId = ulong.Parse(bits[0]);
-                    transferParams.TokenSecure = bits[1];
+                    transferParams.RememberLoginToken = bits[1];
                 }
                 else if ( cookie.Name.StartsWith("steamMachineAuth"))
                 {
@@ -91,6 +88,11 @@ namespace SteamNotificationsTray
         {
             Properties.Settings.Default.Credentials = null;
             Properties.Settings.Default.Save();
+        }
+
+        internal static bool CredentialsAvailable()
+        {
+            return !string.IsNullOrEmpty(Properties.Settings.Default.Credentials);
         }
     }
 }
