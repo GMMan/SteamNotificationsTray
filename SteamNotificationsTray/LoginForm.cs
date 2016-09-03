@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using SteamNotificationsTray.WebLogin;
 using SteamNotificationsTray.WebLogin.Models;
-using Newtonsoft.Json;
 
 namespace SteamNotificationsTray
 {
@@ -24,42 +23,7 @@ namespace SteamNotificationsTray
             InitializeComponent();
         }
 
-        #region Credential saving
-        static byte[] GetStrongNameKey()
-        {
-            var assembly = System.Reflection.Assembly.GetEntryAssembly();
-            return assembly.GetName().GetPublicKey();
-        }
-
-        static TransferParameters GetTransferParameters()
-        {
-            var encryptedParams = Properties.Settings.Default.Credentials;
-            if (string.IsNullOrEmpty(encryptedParams)) return null;
-            try
-            {
-                byte[] encryptedBlob = Convert.FromBase64String(encryptedParams);
-                byte[] decryptedBlob = ProtectedData.Unprotect(encryptedBlob, GetStrongNameKey(), DataProtectionScope.CurrentUser);
-                string decryptedParams = Encoding.UTF8.GetString(decryptedBlob);
-                return JsonConvert.DeserializeObject<TransferParameters>(decryptedParams);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        static void SaveTransferParameters(TransferParameters transferParams)
-        {
-            string serialized = JsonConvert.SerializeObject(transferParams);
-            byte[] blob = Encoding.UTF8.GetBytes(serialized);
-            byte[] cryptedBlob = ProtectedData.Protect(blob, GetStrongNameKey(), DataProtectionScope.CurrentUser);
-            string cryptedParams = Convert.ToBase64String(cryptedBlob);
-            Properties.Settings.Default.Credentials = cryptedParams;
-            Properties.Settings.Default.Save();
-        }
-        #endregion
-
-        byte[] hexToBytes(string str)
+        static byte[] hexToBytes(string str)
         {
             if (str.Length % 2 != 0) throw new ArgumentException("Input does not have even bytes.", "str");
             byte[] data = new byte[str.Length / 2];
@@ -234,7 +198,7 @@ namespace SteamNotificationsTray
                 bool success = await Task.Run<bool>(() => doLogin());
                 if (success)
                 {
-                    SaveTransferParameters(loginResponse.TransferParameters);
+                    CredentialStore.SaveTransferParameters(loginResponse.TransferParameters);
                     DialogResult = System.Windows.Forms.DialogResult.OK;
                     Close();
                 }

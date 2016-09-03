@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CredentialStore.cs" />
     <Compile Include="IconUtils.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
