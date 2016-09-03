@@ -28,28 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.label1 = new System.Windows.Forms.Label();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.mainLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.loginButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.loginButton = new System.Windows.Forms.Button();
             this.emailCodePanel = new System.Windows.Forms.Panel();
-            this.messageLabel = new System.Windows.Forms.Label();
+            this.friendlyNameTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.emailAuthTextBox = new System.Windows.Forms.TextBox();
+            this.messageLabel = new System.Windows.Forms.Label();
             this.mobileAuthPanel = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.mobileAuthTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.friendlyNameTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.captchaPanel = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.captchaPictureBox = new System.Windows.Forms.PictureBox();
-            this.captchaRefreshButton = new System.Windows.Forms.Button();
             this.captchaTextBox = new System.Windows.Forms.TextBox();
+            this.captchaRefreshButton = new System.Windows.Forms.Button();
+            this.captchaPictureBox = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.mainLayoutPanel.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
             this.emailCodePanel.SuspendLayout();
@@ -130,17 +131,6 @@
             this.buttonsPanel.Size = new System.Drawing.Size(256, 29);
             this.buttonsPanel.TabIndex = 0;
             // 
-            // loginButton
-            // 
-            this.loginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.loginButton.Location = new System.Drawing.Point(97, 3);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
-            this.loginButton.TabIndex = 0;
-            this.loginButton.Text = "Sign in";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
-            // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -152,6 +142,17 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // loginButton
+            // 
+            this.loginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.loginButton.Location = new System.Drawing.Point(97, 3);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.TabIndex = 0;
+            this.loginButton.Text = "Sign in";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // emailCodePanel
             // 
@@ -168,17 +169,23 @@
             this.emailCodePanel.TabIndex = 1;
             this.emailCodePanel.Visible = false;
             // 
-            // messageLabel
+            // friendlyNameTextBox
             // 
-            this.messageLabel.AutoSize = true;
-            this.messageLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
-            this.messageLabel.Location = new System.Drawing.Point(3, 0);
-            this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.messageLabel.Size = new System.Drawing.Size(59, 19);
-            this.messageLabel.TabIndex = 2;
-            this.messageLabel.Text = "Message!";
-            this.messageLabel.Visible = false;
+            this.friendlyNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.friendlyNameTextBox.Location = new System.Drawing.Point(3, 55);
+            this.friendlyNameTextBox.Name = "friendlyNameTextBox";
+            this.friendlyNameTextBox.Size = new System.Drawing.Size(250, 20);
+            this.friendlyNameTextBox.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Friendly Name:";
             // 
             // label3
             // 
@@ -198,6 +205,18 @@
             this.emailAuthTextBox.Size = new System.Drawing.Size(250, 20);
             this.emailAuthTextBox.TabIndex = 3;
             // 
+            // messageLabel
+            // 
+            this.messageLabel.AutoSize = true;
+            this.messageLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
+            this.messageLabel.Location = new System.Drawing.Point(3, 0);
+            this.messageLabel.Name = "messageLabel";
+            this.messageLabel.Padding = new System.Windows.Forms.Padding(3);
+            this.messageLabel.Size = new System.Drawing.Size(59, 19);
+            this.messageLabel.TabIndex = 2;
+            this.messageLabel.Text = "Message!";
+            this.messageLabel.Visible = false;
+            // 
             // mobileAuthPanel
             // 
             this.mobileAuthPanel.AutoSize = true;
@@ -211,15 +230,6 @@
             this.mobileAuthPanel.TabIndex = 3;
             this.mobileAuthPanel.Visible = false;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Mobile Authenticator Code:";
-            // 
             // mobileAuthTextBox
             // 
             this.mobileAuthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -229,23 +239,14 @@
             this.mobileAuthTextBox.Size = new System.Drawing.Size(250, 20);
             this.mobileAuthTextBox.TabIndex = 1;
             // 
-            // label5
+            // label4
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 39);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Friendly Name:";
-            // 
-            // friendlyNameTextBox
-            // 
-            this.friendlyNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.friendlyNameTextBox.Location = new System.Drawing.Point(3, 55);
-            this.friendlyNameTextBox.Name = "friendlyNameTextBox";
-            this.friendlyNameTextBox.Size = new System.Drawing.Size(250, 20);
-            this.friendlyNameTextBox.TabIndex = 5;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Mobile Authenticator Code:";
             // 
             // captchaPanel
             // 
@@ -262,24 +263,14 @@
             this.captchaPanel.TabIndex = 4;
             this.captchaPanel.Visible = false;
             // 
-            // label6
+            // captchaTextBox
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Type these characters below:";
-            // 
-            // captchaPictureBox
-            // 
-            this.captchaPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.captchaPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.captchaPictureBox.Location = new System.Drawing.Point(25, 16);
-            this.captchaPictureBox.Name = "captchaPictureBox";
-            this.captchaPictureBox.Size = new System.Drawing.Size(206, 40);
-            this.captchaPictureBox.TabIndex = 1;
-            this.captchaPictureBox.TabStop = false;
+            this.captchaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.captchaTextBox.Location = new System.Drawing.Point(3, 91);
+            this.captchaTextBox.Name = "captchaTextBox";
+            this.captchaTextBox.Size = new System.Drawing.Size(250, 20);
+            this.captchaTextBox.TabIndex = 3;
             // 
             // captchaRefreshButton
             // 
@@ -292,14 +283,24 @@
             this.captchaRefreshButton.UseVisualStyleBackColor = true;
             this.captchaRefreshButton.Click += new System.EventHandler(this.captchaRefreshButton_Click);
             // 
-            // captchaTextBox
+            // captchaPictureBox
             // 
-            this.captchaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.captchaTextBox.Location = new System.Drawing.Point(3, 91);
-            this.captchaTextBox.Name = "captchaTextBox";
-            this.captchaTextBox.Size = new System.Drawing.Size(250, 20);
-            this.captchaTextBox.TabIndex = 3;
+            this.captchaPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.captchaPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.captchaPictureBox.Location = new System.Drawing.Point(25, 16);
+            this.captchaPictureBox.Name = "captchaPictureBox";
+            this.captchaPictureBox.Size = new System.Drawing.Size(206, 40);
+            this.captchaPictureBox.TabIndex = 1;
+            this.captchaPictureBox.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(147, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Type these characters below:";
             // 
             // LoginForm
             // 
@@ -316,6 +317,7 @@
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.Text = "Log into Steam";
