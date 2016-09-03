@@ -18,6 +18,8 @@ namespace SteamNotificationsTray
         ContextMenuStrip notificationsContextMenu;
         Timer refreshTimer = new Timer();
         NotificationsClient client = new NotificationsClient();
+        bool newNotifAcknowledged;
+        bool hasNotifications;
 
         public TrayAppContext()
         {
@@ -33,8 +35,19 @@ namespace SteamNotificationsTray
             refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
             refreshTimer.Tick += refreshTimer_Tick;
 
-            // 1. Get cookies so notification counts can be retrieved
-            // 1a. If no cookies available, show login form
+            // Must do this true/false charade to get context menus associated for some reason
+            countIcon.ContextMenu = appContextMenu;
+            countIcon.Visible = true;
+            countIcon.Visible = false;
+            mainIcon.ContextMenu = appContextMenu;
+            mainIcon.Icon = IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize);
+            mainIcon.Visible = true;
+            mainIcon.Visible = false;
+
+            mainIcon.Click += notifyIcon_Click;
+            countIcon.Click += notifyIcon_Click;
+
+            // If no cookies available, show login form
             //CredentialStore.ClearCredentials();
             if (!CredentialStore.CredentialsAvailable())
             {
@@ -65,12 +78,7 @@ namespace SteamNotificationsTray
             CookieContainer cookies = CredentialStore.GetCommunityCookies();
             client.SetCookies(cookies);
 
-            // 2. Set up tray icons
-            mainIcon.ContextMenu = appContextMenu;
-            mainIcon.Icon = IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize);
-            mainIcon.Visible = true;
-
-            // 3. Set up timer and fire
+            // Set up timer and fire
             refreshTimer.Start();
             updateNotifications();
         }
@@ -89,39 +97,75 @@ namespace SteamNotificationsTray
                 {
                     if (counts.TotalNotifications == 0)
                     {
+                        hasNotifications = false;
                         countIcon.Visible = false;
                         ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
                     }
                     else
                     {
+                        hasNotifications = true;
                         NotificationCounts oldCounts = client.PrevCounts;
                         Color newColor;
                         if (oldCounts == null)
                         {
+                            newNotifAcknowledged = true;
                             newColor = Properties.Settings.Default.InboxAvailableColor;
                         }
                         else
                         {
-                            newColor = counts.TotalNotifications > oldCounts.TotalNotifications ? Properties.Settings.Default.InboxNewColor : Properties.Settings.Default.InboxAvailableColor;
+                            if (counts.TotalNotifications > oldCounts.TotalNotifications)
+                            {
+                                newNotifAcknowledged = false;
+                                newColor = Properties.Settings.Default.InboxNewColor;
+                            }
+                            else if (counts.TotalNotifications == oldCounts.TotalNotifications)
+                            {
+                                newColor = newNotifAcknowledged ? Properties.Settings.Default.InboxAvailableColor : Properties.Settings.Default.InboxNewColor;
+                            }
+                            else
+                            {
+                                newNotifAcknowledged = true;
+                                newColor = Properties.Settings.Default.InboxAvailableColor;
+                            }                            
                         }
-                        ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, newColor, SystemInformation.SmallIconSize));
 
+                        ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, newColor, SystemInformation.SmallIconSize));
+                        
                         // 7 point for 3 digits
                         // 8 point for 2 digits
                         // 9 point for 1 digit
                         string text = counts.TotalNotifications.ToString();
                         ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
 
-                        countIcon.Visible = true;
+                        if (!countIcon.Visible)
+                        {
+                            // Hide main icon first, then show in this order so the count is on the left
+                            mainIcon.Visible = false;
+                            countIcon.Visible = true;
+                            mainIcon.Visible = true;
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 // Should handle 401 exceptions by asking to log in again
+                //MessageBox.Show(ex.ToString());
             }
         }
 
+        void notifyIcon_Click(object sender, EventArgs e)
+        {
+            if (hasNotifications)
+            {
+                // Make icon normal colored
+                newNotifAcknowledged = true;
+                ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+                string text = client.CurrentCounts.TotalNotifications.ToString();
+                ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+            }
+        }
+        
         protected override void ExitThreadCore()
         {
             mainIcon.Visible = false;
