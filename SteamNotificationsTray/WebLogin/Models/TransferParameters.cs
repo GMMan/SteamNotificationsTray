@@ -20,5 +20,8 @@ namespace SteamNotificationsTray.WebLogin.Models
         public string WebCookie { get; set; }
         [JsonProperty("token_secure")]
         public string TokenSecure { get; set; }
+
+        // Special property that's not in the actual response
+        public string RememberLoginToken { get; set; }
     }
 }

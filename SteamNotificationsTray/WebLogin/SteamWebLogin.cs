@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
@@ -20,10 +21,17 @@ namespace SteamNotificationsTray.WebLogin
         static readonly string RenderCaptchaPath = Endpoint + "rendercaptcha/";
         // Not handling: account recovery stuff
 
-        HttpClient client = new HttpClient();
+        HttpClient client;
+        HttpClientHandler handler = new HttpClientHandler();
+
+        public SteamWebLogin()
+        {
+            client = new HttpClient(handler);
+        }
 
         public async Task<GetRsaKeyResponse> GetRsaKeyAsync(string username)
         {
+            handler.CookieContainer = new CookieContainer();
             var p = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("username", username)
             });
@@ -41,6 +49,7 @@ namespace SteamNotificationsTray.WebLogin
 
         public async Task<DoLoginResponse> DoLoginAsync(DoLoginRequest req)
         {
+            handler.CookieContainer = new CookieContainer();
             var p = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("password", req.Password ?? string.Empty),
                 new KeyValuePair<string, string>("username", req.Username ?? string.Empty),
@@ -51,13 +60,26 @@ namespace SteamNotificationsTray.WebLogin
                 new KeyValuePair<string, string>("captcha_text", req.CaptchaText ?? string.Empty),
                 new KeyValuePair<string, string>("emailsteamid", req.EmailSteamId.HasValue ? req.EmailSteamId.Value.ToString() : string.Empty),
                 new KeyValuePair<string, string>("rsatimestamp", req.RsaTimeStamp.ToString()),
-                new KeyValuePair<string, string>("remember_login", req.RememberLogin.ToString()),
+                new KeyValuePair<string, string>("remember_login", req.RememberLogin.ToString().ToLowerInvariant()),
             });
             HttpResponseMessage resp = await client.PostAsync(DoLoginPath, p);
             if (resp.IsSuccessStatusCode)
             {
                 string respText = await resp.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<DoLoginResponse>(respText);
+                DoLoginResponse respObj = JsonConvert.DeserializeObject<DoLoginResponse>(respText);
+                if (req.RememberLogin && respObj.TransferParameters != null)
+                {
+                    foreach (Cookie cookie in handler.CookieContainer.GetCookies(new Uri(BaseDomain)))
+                    {
+                        if (cookie.Name == "steamRememberLogin")
+                        {
+                            string[] bits = WebUtility.HtmlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
+                            respObj.TransferParameters.RememberLoginToken = bits[1];
+                            break;
+                        }
+                    }
+                }
+                return respObj;
             }
             else
             {
@@ -67,6 +89,7 @@ namespace SteamNotificationsTray.WebLogin
 
         public async Task<long> RefreshCaptchaAsync()
         {
+            handler.CookieContainer = new CookieContainer();
             var p = new FormUrlEncodedContent(new KeyValuePair<string, string>[] { });
             HttpResponseMessage resp = await client.PostAsync(RefreshCaptchaPath, p);
             if (resp.IsSuccessStatusCode)
@@ -97,6 +120,7 @@ namespace SteamNotificationsTray.WebLogin
 
         public async Task<byte[]> RenderCaptchaAsync(long gid)
         {
+            handler.CookieContainer = new CookieContainer();
             string query;
             using (var p = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("gid", gid.ToString())
