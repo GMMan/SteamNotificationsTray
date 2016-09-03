@@ -39,6 +39,7 @@ namespace SteamNotificationsTray
         {
             TransferParameters newParams = new TransferParameters
             {
+                SteamId = transferParams.SteamId,
                 WebCookie = transferParams.WebCookie,
                 RememberLoginToken = transferParams.RememberLoginToken
             };
@@ -56,7 +57,7 @@ namespace SteamNotificationsTray
             if (transferParams == null) return null;
             CookieContainer cookies = new CookieContainer();
             // 1. Persistent login cookie
-            cookies.Add(new Cookie("steamRememberLogin", WebUtility.HtmlEncode(string.Format("{0}||{1}", transferParams.SteamId, transferParams.RememberLoginToken)), "/", "steamcommunity.com"));
+            cookies.Add(new Cookie("steamRememberLogin", WebUtility.UrlEncode(string.Format("{0}||{1}", transferParams.SteamId, transferParams.RememberLoginToken)), "/", "steamcommunity.com"));
             // 2. Machine auth token
             cookies.Add(new Cookie(string.Format("steamMachineAuth{0}", transferParams.SteamId), transferParams.WebCookie, "/", "steamcommunity.com") { Secure = true });
             return cookies;
@@ -70,7 +71,7 @@ namespace SteamNotificationsTray
             {
                 if (cookie.Name == "steamRememberLogin")
                 {
-                    string[] bits = WebUtility.HtmlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
+                    string[] bits = WebUtility.UrlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
                     transferParams.SteamId = ulong.Parse(bits[0]);
                     transferParams.RememberLoginToken = bits[1];
                 }
