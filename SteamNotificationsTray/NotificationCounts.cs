@@ -17,5 +17,7 @@ namespace SteamNotificationsTray
         public int AsyncGame { get; set; } // 2
         public int ModeratorMessage { get; set; } // 3
         public int HelpRequestReply { get; set; } // 10
+
+        public int TotalNotifications { get; set; }
     }
 }

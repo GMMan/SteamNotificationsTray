@@ -23,13 +23,13 @@ namespace SteamNotificationsTray
             client = new HttpClient(handler);
         }
 
-        public async Task<NotificationCounts> PollNotificationCounts()
+        public async Task<NotificationCounts> PollNotificationCountsAsync()
         {
             string response = await client.GetStringAsync("https://steamcommunity.com/actions/GetNotificationCounts");
             if (response == "null") return null;
             NotificationCounts counts = new NotificationCounts();
             JObject respObj = JObject.Parse(response);
-            JToken notifsObj = respObj["notifsObj"];
+            JToken notifsObj = respObj["notifications"];
             foreach (JProperty notif in notifsObj)
             {
                 switch (notif.Name)
@@ -62,6 +62,7 @@ namespace SteamNotificationsTray
                         counts.HelpRequestReply = (int)notif.Value;
                         break;
                 }
+                ++counts.TotalNotifications;
             }
             PrevCounts = CurrentCounts;
             CurrentCounts = counts;
