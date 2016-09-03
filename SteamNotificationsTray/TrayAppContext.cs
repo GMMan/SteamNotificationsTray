@@ -12,6 +12,7 @@ namespace SteamNotificationsTray
 {
     class TrayAppContext : ApplicationContext
     {
+        WindowsFormsSynchronizationContext syncContext;
         NotifyIcon mainIcon = new NotifyIcon();
         NotifyIcon countIcon = new NotifyIcon();
         ContextMenu appContextMenu;
@@ -23,6 +24,8 @@ namespace SteamNotificationsTray
 
         public TrayAppContext()
         {
+            syncContext = new WindowsFormsSynchronizationContext();
+
             appContextMenu = new ContextMenu(new MenuItem[] {
                 new MenuItem("Refresh now", (sender, e) => {
                     updateNotifications();
@@ -41,6 +44,7 @@ namespace SteamNotificationsTray
             countIcon.Visible = false;
             mainIcon.ContextMenu = appContextMenu;
             mainIcon.Icon = IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize);
+            mainIcon.Text = "Steam Notifications Tray App";
             mainIcon.Visible = true;
             mainIcon.Visible = false;
 
@@ -51,15 +55,20 @@ namespace SteamNotificationsTray
             //CredentialStore.ClearCredentials();
             if (!CredentialStore.CredentialsAvailable())
             {
-                LoginForm loginForm = new LoginForm();
-                loginForm.FormClosed += loginForm_FormClosed;
-                MainForm = loginForm;
-                loginForm.Show();
+                promptLogin();
             }
             else
             {
                 finishSetup();
             }
+        }
+
+        void promptLogin()
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.FormClosed += loginForm_FormClosed;
+            MainForm = loginForm;
+            loginForm.Show();
         }
 
         void loginForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -140,6 +149,8 @@ namespace SteamNotificationsTray
                         string text = counts.TotalNotifications.ToString();
                         ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
 
+                        countIcon.Text = string.Format("{0} unread Steam notification{1}", counts.TotalNotifications, counts.TotalNotifications != 1 ? "s" : string.Empty);
+
                         if (!countIcon.Visible)
                         {
                             // Hide main icon first, then show in this order so the count is on the left
@@ -150,10 +161,34 @@ namespace SteamNotificationsTray
                     }
                 }
             }
+            catch (System.Net.Http.HttpRequestException ex)
+            {
+                if (ex.Message.Contains("401"))
+                {
+                    refreshTimer.Stop();
+                    syncContext.Post(new System.Threading.SendOrPostCallback((o) => promptLogin()), null);
+                }
+                else
+                {
+                    markException("Error polling for notifications: " + ex.Message);
+                }
+            }
             catch (Exception ex)
             {
-                // Should handle 401 exceptions by asking to log in again
-                //MessageBox.Show(ex.ToString());
+                markException("Exception: " + ex.Message);
+            }
+        }
+
+        void markException(string message)
+        {
+            if (message.Length >= 64) message = message.Substring(0, 62) + "…";
+            if (mainIcon.Visible)
+            {
+                mainIcon.Text = message;
+            }
+            else
+            {
+                countIcon.Text = message;
             }
         }
 
