@@ -21,86 +21,85 @@ namespace SteamNotificationsTray.WebLogin
         static readonly string RenderCaptchaPath = Endpoint + "rendercaptcha/";
         // Not handling: account recovery stuff
 
-        HttpClient client;
-        HttpClientHandler handler = new HttpClientHandler();
-
-        public SteamWebLogin()
-        {
-            client = new HttpClient(handler);
-        }
-
         public async Task<GetRsaKeyResponse> GetRsaKeyAsync(string username)
         {
-            handler.CookieContainer = new CookieContainer();
-            var p = new FormUrlEncodedContent(new[] {
-                new KeyValuePair<string, string>("username", username)
-            });
-            HttpResponseMessage resp = await client.PostAsync(GetRsaKeyPath, p);
-            if (resp.IsSuccessStatusCode)
+            using (HttpClient client = new HttpClient())
             {
-                string respText = await resp.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<GetRsaKeyResponse>(respText);
-            }
-            else
-            {
-                return null;
+                var p = new FormUrlEncodedContent(new[] {
+                    new KeyValuePair<string, string>("username", username)
+                });
+                HttpResponseMessage resp = await client.PostAsync(GetRsaKeyPath, p);
+                if (resp.IsSuccessStatusCode)
+                {
+                    string respText = await resp.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<GetRsaKeyResponse>(respText);
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
         public async Task<DoLoginResponse> DoLoginAsync(DoLoginRequest req)
         {
-            handler.CookieContainer = new CookieContainer();
-            var p = new FormUrlEncodedContent(new[] {
-                new KeyValuePair<string, string>("password", req.Password ?? string.Empty),
-                new KeyValuePair<string, string>("username", req.Username ?? string.Empty),
-                new KeyValuePair<string, string>("twofactorcode", req.TwoFactorCode ?? string.Empty),
-                new KeyValuePair<string, string>("emailauth", req.EmailAuth ?? string.Empty),
-                new KeyValuePair<string, string>("loginfriendlyname", req.LoginFriendlyName ?? string.Empty),
-                new KeyValuePair<string, string>("captchagid", req.CaptchaGid.ToString()),
-                new KeyValuePair<string, string>("captcha_text", req.CaptchaText ?? string.Empty),
-                new KeyValuePair<string, string>("emailsteamid", req.EmailSteamId.HasValue ? req.EmailSteamId.Value.ToString() : string.Empty),
-                new KeyValuePair<string, string>("rsatimestamp", req.RsaTimeStamp.ToString()),
-                new KeyValuePair<string, string>("remember_login", req.RememberLogin.ToString().ToLowerInvariant()),
-            });
-            HttpResponseMessage resp = await client.PostAsync(DoLoginPath, p);
-            if (resp.IsSuccessStatusCode)
+            HttpClientHandler handler = new HttpClientHandler { CookieContainer = new CookieContainer() };
+            using (HttpClient client = new HttpClient(handler))
             {
-                string respText = await resp.Content.ReadAsStringAsync();
-                DoLoginResponse respObj = JsonConvert.DeserializeObject<DoLoginResponse>(respText);
-                if (req.RememberLogin && respObj.TransferParameters != null)
+                var p = new FormUrlEncodedContent(new[] {
+                    new KeyValuePair<string, string>("password", req.Password ?? string.Empty),
+                    new KeyValuePair<string, string>("username", req.Username ?? string.Empty),
+                    new KeyValuePair<string, string>("twofactorcode", req.TwoFactorCode ?? string.Empty),
+                    new KeyValuePair<string, string>("emailauth", req.EmailAuth ?? string.Empty),
+                    new KeyValuePair<string, string>("loginfriendlyname", req.LoginFriendlyName ?? string.Empty),
+                    new KeyValuePair<string, string>("captchagid", req.CaptchaGid.ToString()),
+                    new KeyValuePair<string, string>("captcha_text", req.CaptchaText ?? string.Empty),
+                    new KeyValuePair<string, string>("emailsteamid", req.EmailSteamId.HasValue ? req.EmailSteamId.Value.ToString() : string.Empty),
+                    new KeyValuePair<string, string>("rsatimestamp", req.RsaTimeStamp.ToString()),
+                    new KeyValuePair<string, string>("remember_login", req.RememberLogin.ToString().ToLowerInvariant()),
+                });
+                HttpResponseMessage resp = await client.PostAsync(DoLoginPath, p);
+                if (resp.IsSuccessStatusCode)
                 {
-                    foreach (Cookie cookie in handler.CookieContainer.GetCookies(new Uri(BaseDomain)))
+                    string respText = await resp.Content.ReadAsStringAsync();
+                    DoLoginResponse respObj = JsonConvert.DeserializeObject<DoLoginResponse>(respText);
+                    if (req.RememberLogin && respObj.TransferParameters != null)
                     {
-                        if (cookie.Name == "steamRememberLogin")
+                        foreach (Cookie cookie in handler.CookieContainer.GetCookies(new Uri(BaseDomain)))
                         {
-                            string[] bits = WebUtility.HtmlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
-                            respObj.TransferParameters.RememberLoginToken = bits[1];
-                            break;
+                            if (cookie.Name == "steamRememberLogin")
+                            {
+                                string[] bits = WebUtility.UrlDecode(cookie.Value).Split(new[] { "||" }, 2, StringSplitOptions.None);
+                                respObj.TransferParameters.RememberLoginToken = bits[1];
+                                break;
+                            }
                         }
                     }
+                    return respObj;
                 }
-                return respObj;
-            }
-            else
-            {
-                return null;
+                else
+                {
+                    return null;
+                }
             }
         }
 
         public async Task<long> RefreshCaptchaAsync()
         {
-            handler.CookieContainer = new CookieContainer();
-            var p = new FormUrlEncodedContent(new KeyValuePair<string, string>[] { });
-            HttpResponseMessage resp = await client.PostAsync(RefreshCaptchaPath, p);
-            if (resp.IsSuccessStatusCode)
+            using (HttpClient client = new HttpClient())
             {
-                string respText = await resp.Content.ReadAsStringAsync();
-                var obj = Newtonsoft.Json.Linq.JObject.Parse(respText);
-                return obj.Value<long>("gid");
-            }
-            else
-            {
-                return -1;
+                var p = new FormUrlEncodedContent(new KeyValuePair<string, string>[] { });
+                HttpResponseMessage resp = await client.PostAsync(RefreshCaptchaPath, p);
+                if (resp.IsSuccessStatusCode)
+                {
+                    string respText = await resp.Content.ReadAsStringAsync();
+                    var obj = Newtonsoft.Json.Linq.JObject.Parse(respText);
+                    return obj.Value<long>("gid");
+                }
+                else
+                {
+                    return -1;
+                }
             }
         }
 
@@ -120,25 +119,27 @@ namespace SteamNotificationsTray.WebLogin
 
         public async Task<byte[]> RenderCaptchaAsync(long gid)
         {
-            handler.CookieContainer = new CookieContainer();
-            string query;
-            using (var p = new FormUrlEncodedContent(new[] {
-                new KeyValuePair<string, string>("gid", gid.ToString())
-            }))
+            using (HttpClient client = new HttpClient())
             {
-                query = await p.ReadAsStringAsync();
-            }
-            UriBuilder builder = new UriBuilder(RenderCaptchaPath);
-            builder.Query = query;
+                string query;
+                using (var p = new FormUrlEncodedContent(new[] {
+                    new KeyValuePair<string, string>("gid", gid.ToString())
+                }))
+                {
+                    query = await p.ReadAsStringAsync();
+                }
+                UriBuilder builder = new UriBuilder(RenderCaptchaPath);
+                builder.Query = query;
 
-            HttpResponseMessage resp = await client.GetAsync(builder.Uri);
-            if (resp.IsSuccessStatusCode)
-            {
-                return await resp.Content.ReadAsByteArrayAsync();
-            }
-            else
-            {
-                return null;
+                HttpResponseMessage resp = await client.GetAsync(builder.Uri);
+                if (resp.IsSuccessStatusCode)
+                {
+                    return await resp.Content.ReadAsByteArrayAsync();
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }

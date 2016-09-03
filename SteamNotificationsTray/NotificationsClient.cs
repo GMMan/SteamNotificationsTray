@@ -11,67 +11,64 @@ namespace SteamNotificationsTray
 {
     class NotificationsClient
     {
-        HttpClient client;
-        HttpClientHandler handler;
+        CookieContainer cookies;
 
         public NotificationCounts PrevCounts { get; private set; }
         public NotificationCounts CurrentCounts { get; private set; }
 
-        public NotificationsClient()
-        {
-            handler = new HttpClientHandler();
-            client = new HttpClient(handler);
-        }
-
         public async Task<NotificationCounts> PollNotificationCountsAsync()
         {
-            string response = await client.GetStringAsync("https://steamcommunity.com/actions/GetNotificationCounts");
-            if (response == "null") return null;
-            NotificationCounts counts = new NotificationCounts();
-            JObject respObj = JObject.Parse(response);
-            JToken notifsObj = respObj["notifications"];
-            foreach (JProperty notif in notifsObj)
+            HttpClientHandler handler = new HttpClientHandler { CookieContainer = cookies };
+            using (HttpClient client = new HttpClient(handler))
             {
-                switch (notif.Name)
+                string response = await client.GetStringAsync("https://steamcommunity.com/actions/GetNotificationCounts");
+                if (response == "null") return null;
+                NotificationCounts counts = new NotificationCounts();
+                JObject respObj = JObject.Parse(response);
+                JToken notifsObj = respObj["notifications"];
+                foreach (JProperty notif in notifsObj)
                 {
-                    case "4":
-                        counts.Comments = (int)notif.Value;
-                        break;
-                    case "5":
-                        counts.Items = (int)notif.Value;
-                        break;
-                    case "6":
-                        counts.Invites = (int)notif.Value;
-                        break;
-                    case "8":
-                        counts.Gifts = (int)notif.Value;
-                        break;
-                    case "9":
-                        counts.OfflineMessages = (int)notif.Value;
-                        break;
-                    case "1":
-                        counts.TradeOffers = (int)notif.Value;
-                        break;
-                    case "2":
-                        counts.AsyncGame = (int)notif.Value;
-                        break;
-                    case "3":
-                        counts.ModeratorMessage = (int)notif.Value;
-                        break;
-                    case "10":
-                        counts.HelpRequestReply = (int)notif.Value;
-                        break;
+                    switch (notif.Name)
+                    {
+                        case "4":
+                            counts.Comments = (int)notif.Value;
+                            break;
+                        case "5":
+                            counts.Items = (int)notif.Value;
+                            break;
+                        case "6":
+                            counts.Invites = (int)notif.Value;
+                            break;
+                        case "8":
+                            counts.Gifts = (int)notif.Value;
+                            break;
+                        case "9":
+                            counts.OfflineMessages = (int)notif.Value;
+                            break;
+                        case "1":
+                            counts.TradeOffers = (int)notif.Value;
+                            break;
+                        case "2":
+                            counts.AsyncGame = (int)notif.Value;
+                            break;
+                        case "3":
+                            counts.ModeratorMessage = (int)notif.Value;
+                            break;
+                        case "10":
+                            counts.HelpRequestReply = (int)notif.Value;
+                            break;
+                    }
+                    counts.TotalNotifications += (int)notif.Value;
                 }
-                ++counts.TotalNotifications;
+                PrevCounts = CurrentCounts;
+                CurrentCounts = counts;
+                return counts;
             }
-            PrevCounts = CurrentCounts;
-            CurrentCounts = counts;
-            return counts;
         }
 
         public void SetCookies(CookieContainer cookies)
         {
-            handler.CookieContainer = cookies;
+            this.cookies = cookies;
         }
     }
 }
