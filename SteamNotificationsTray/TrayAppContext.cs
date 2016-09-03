@@ -16,6 +16,8 @@ namespace SteamNotificationsTray
         NotifyIcon mainIcon = new NotifyIcon();
         NotifyIcon countIcon = new NotifyIcon();
         ContextMenu appContextMenu;
+        MenuItem loginMenuItem;
+        MenuItem refreshMenuItem;
         ContextMenuStrip notificationsContextMenu;
         Timer refreshTimer = new Timer();
         NotificationsClient client = new NotificationsClient();
@@ -26,9 +28,21 @@ namespace SteamNotificationsTray
         {
             syncContext = new WindowsFormsSynchronizationContext();
 
+            loginMenuItem = new MenuItem("Log in", (sender, e) =>
+            {
+                promptLogin();
+            }) { Visible = false };
+            refreshMenuItem = new MenuItem("Refresh now", (sender, e) =>
+            {
+                updateNotifications();
+            });
+
             appContextMenu = new ContextMenu(new MenuItem[] {
-                new MenuItem("Refresh now", (sender, e) => {
-                    updateNotifications();
+                loginMenuItem,
+                refreshMenuItem,
+                new MenuItem("Settings", (sender, e) =>
+                {
+                    new SettingsForm().Show();
                 }),
                 new MenuItem("Exit", (sender, e) => {
                     Application.Exit();
@@ -66,6 +80,7 @@ namespace SteamNotificationsTray
 
         void promptLogin()
         {
+            mainIcon.Visible = false;
             LoginForm loginForm = new LoginForm();
             loginForm.FormClosed += loginForm_FormClosed;
             MainForm = loginForm;
@@ -87,6 +102,10 @@ namespace SteamNotificationsTray
             // Set up cookies
             CookieContainer cookies = CredentialStore.GetCommunityCookies();
             client.SetCookies(cookies);
+
+            // Update right click menu
+            loginMenuItem.Visible = false;
+            refreshMenuItem.Visible = true;
 
             // Set main icon visible
             ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
@@ -170,7 +189,9 @@ namespace SteamNotificationsTray
                     // Login info expired
                     refreshTimer.Stop();
                     ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDisabled, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
-                    syncContext.Post(new System.Threading.SendOrPostCallback((o) => promptLogin()), null);
+                    countIcon.Visible = false;
+                    loginMenuItem.Visible = true;
+                    refreshMenuItem.Visible = false;
                 }
                 else
                 {
