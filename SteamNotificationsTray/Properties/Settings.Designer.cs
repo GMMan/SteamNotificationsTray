@@ -82,5 +82,65 @@ namespace SteamNotificationsTray.Properties {
                 this["RefreshInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("59, 57, 56")]
+        public global::System.Drawing.Color NotificationPopupBackgroundColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationPopupBackgroundColor"]));
+            }
+            set {
+                this["NotificationPopupBackgroundColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("130, 128, 124")]
+        public global::System.Drawing.Color NotificationPopupBorderColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationPopupBorderColor"]));
+            }
+            set {
+                this["NotificationPopupBorderColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("191, 191, 191")]
+        public global::System.Drawing.Color NotificationInactiveColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationInactiveColor"]));
+            }
+            set {
+                this["NotificationInactiveColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("33, 45, 61")]
+        public global::System.Drawing.Color NotificationFocusColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationFocusColor"]));
+            }
+            set {
+                this["NotificationFocusColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("112, 186, 36")]
+        public global::System.Drawing.Color NotificationActiveColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationActiveColor"]));
+            }
+            set {
+                this["NotificationActiveColor"] = value;
+            }
+        }
     }
 }

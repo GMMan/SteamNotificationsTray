@@ -117,6 +117,63 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>Steam Notifications Tray App</value>
+  </data>
+  <data name="AsyncGamesPlural" xml:space="preserve">
+    <value>{0} new turns waiting</value>
+  </data>
+  <data name="AsyncGamesSingular" xml:space="preserve">
+    <value>1 turn waiting</value>
+  </data>
+  <data name="CommentsPlural" xml:space="preserve">
+    <value>{0} new comments</value>
+  </data>
+  <data name="CommentsSingular" xml:space="preserve">
+    <value>1 new comment</value>
+  </data>
+  <data name="ErrorPolling" xml:space="preserve">
+    <value>Error polling for notifications: </value>
+  </data>
+  <data name="Exception" xml:space="preserve">
+    <value>Exception: </value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="GiftsPlural" xml:space="preserve">
+    <value>{0} new gifts</value>
+  </data>
+  <data name="GiftsSingular" xml:space="preserve">
+    <value>1 new gift</value>
+  </data>
+  <data name="HelpRequestRepliesPlural" xml:space="preserve">
+    <value>{0} replies from Steam Support</value>
+  </data>
+  <data name="HelpRequestRepliesSingular" xml:space="preserve">
+    <value>1 reply from Steam Support</value>
+  </data>
+  <data name="InvitesPlural" xml:space="preserve">
+    <value>{0} new invites</value>
+  </data>
+  <data name="InvitesSingular" xml:space="preserve">
+    <value>1 new invite</value>
+  </data>
+  <data name="ItemsPlural" xml:space="preserve">
+    <value>{0} new items in your inventory</value>
+  </data>
+  <data name="ItemsSingular" xml:space="preserve">
+    <value>1 new item in your inventory</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="ModeratorMessagesPlural" xml:space="preserve">
+    <value>{0} community moderation messages</value>
+  </data>
+  <data name="ModeratorMessagesSingular" xml:space="preserve">
+    <value>1 community moderation message</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="NotificationActive" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\graphics\inbox_notification.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -126,5 +183,29 @@
   </data>
   <data name="NotificationDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\graphics\inbox_notification_inactive_disabled.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OfflineMessagesPlural" xml:space="preserve">
+    <value>{0} unread chat messages</value>
+  </data>
+  <data name="OfflineMessagesSingular" xml:space="preserve">
+    <value>1 unread chat message</value>
+  </data>
+  <data name="RefreshNow" xml:space="preserve">
+    <value>Refresh now</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TradeOffersPlural" xml:space="preserve">
+    <value>{0} new trade notifications</value>
+  </data>
+  <data name="TradeOffersSingular" xml:space="preserve">
+    <value>1 new trade notification</value>
+  </data>
+  <data name="UnreadNotificationsPlural" xml:space="preserve">
+    <value>{0} unread Steam notifications</value>
+  </data>
+  <data name="UnreadNotificationsSingular" xml:space="preserve">
+    <value>1 unread Steam notification</value>
   </data>
 </root>

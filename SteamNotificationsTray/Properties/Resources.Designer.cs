@@ -61,6 +61,177 @@ namespace SteamNotificationsTray.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Steam Notifications Tray App.
+        /// </summary>
+        internal static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new turns waiting.
+        /// </summary>
+        internal static string AsyncGamesPlural {
+            get {
+                return ResourceManager.GetString("AsyncGamesPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 turn waiting.
+        /// </summary>
+        internal static string AsyncGamesSingular {
+            get {
+                return ResourceManager.GetString("AsyncGamesSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new comments.
+        /// </summary>
+        internal static string CommentsPlural {
+            get {
+                return ResourceManager.GetString("CommentsPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new comment.
+        /// </summary>
+        internal static string CommentsSingular {
+            get {
+                return ResourceManager.GetString("CommentsSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error polling for notifications: .
+        /// </summary>
+        internal static string ErrorPolling {
+            get {
+                return ResourceManager.GetString("ErrorPolling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exception: .
+        /// </summary>
+        internal static string Exception {
+            get {
+                return ResourceManager.GetString("Exception", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new gifts.
+        /// </summary>
+        internal static string GiftsPlural {
+            get {
+                return ResourceManager.GetString("GiftsPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new gift.
+        /// </summary>
+        internal static string GiftsSingular {
+            get {
+                return ResourceManager.GetString("GiftsSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} replies from Steam Support.
+        /// </summary>
+        internal static string HelpRequestRepliesPlural {
+            get {
+                return ResourceManager.GetString("HelpRequestRepliesPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 reply from Steam Support.
+        /// </summary>
+        internal static string HelpRequestRepliesSingular {
+            get {
+                return ResourceManager.GetString("HelpRequestRepliesSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new invites.
+        /// </summary>
+        internal static string InvitesPlural {
+            get {
+                return ResourceManager.GetString("InvitesPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new invite.
+        /// </summary>
+        internal static string InvitesSingular {
+            get {
+                return ResourceManager.GetString("InvitesSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new items in your inventory.
+        /// </summary>
+        internal static string ItemsPlural {
+            get {
+                return ResourceManager.GetString("ItemsPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new item in your inventory.
+        /// </summary>
+        internal static string ItemsSingular {
+            get {
+                return ResourceManager.GetString("ItemsSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        internal static string LogIn {
+            get {
+                return ResourceManager.GetString("LogIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} community moderation messages.
+        /// </summary>
+        internal static string ModeratorMessagesPlural {
+            get {
+                return ResourceManager.GetString("ModeratorMessagesPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 community moderation message.
+        /// </summary>
+        internal static string ModeratorMessagesSingular {
+            get {
+                return ResourceManager.GetString("ModeratorMessagesSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon NotificationActive {
@@ -87,6 +258,78 @@ namespace SteamNotificationsTray.Properties {
             get {
                 object obj = ResourceManager.GetObject("NotificationDisabled", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} unread chat messages.
+        /// </summary>
+        internal static string OfflineMessagesPlural {
+            get {
+                return ResourceManager.GetString("OfflineMessagesPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 unread chat message.
+        /// </summary>
+        internal static string OfflineMessagesSingular {
+            get {
+                return ResourceManager.GetString("OfflineMessagesSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh now.
+        /// </summary>
+        internal static string RefreshNow {
+            get {
+                return ResourceManager.GetString("RefreshNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} new trade notifications.
+        /// </summary>
+        internal static string TradeOffersPlural {
+            get {
+                return ResourceManager.GetString("TradeOffersPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 new trade notification.
+        /// </summary>
+        internal static string TradeOffersSingular {
+            get {
+                return ResourceManager.GetString("TradeOffersSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} unread Steam notifications.
+        /// </summary>
+        internal static string UnreadNotificationsPlural {
+            get {
+                return ResourceManager.GetString("UnreadNotificationsPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 unread Steam notification.
+        /// </summary>
+        internal static string UnreadNotificationsSingular {
+            get {
+                return ResourceManager.GetString("UnreadNotificationsSingular", resourceCulture);
             }
         }
     }

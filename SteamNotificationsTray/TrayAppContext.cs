@@ -7,10 +7,11 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Net;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace SteamNotificationsTray
 {
-    class TrayAppContext : ApplicationContext
+    partial class TrayAppContext : ApplicationContext
     {
         WindowsFormsSynchronizationContext syncContext;
         NotifyIcon mainIcon = new NotifyIcon();
@@ -18,21 +19,22 @@ namespace SteamNotificationsTray
         ContextMenu appContextMenu;
         MenuItem loginMenuItem;
         MenuItem refreshMenuItem;
-        ContextMenuStrip notificationsContextMenu;
         Timer refreshTimer = new Timer();
         NotificationsClient client = new NotificationsClient();
         bool newNotifAcknowledged;
         bool hasNotifications;
+        MethodInfo NotifyIcon_ShowContextMenu;
 
         public TrayAppContext()
         {
+            NotifyIcon_ShowContextMenu = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance);
             syncContext = new WindowsFormsSynchronizationContext();
 
-            loginMenuItem = new MenuItem("Log in", (sender, e) =>
+            loginMenuItem = new MenuItem(Properties.Resources.LogIn, (sender, e) =>
             {
                 promptLogin();
             }) { Visible = false };
-            refreshMenuItem = new MenuItem("Refresh now", (sender, e) =>
+            refreshMenuItem = new MenuItem(Properties.Resources.RefreshNow, (sender, e) =>
             {
                 updateNotifications();
             });
@@ -40,14 +42,16 @@ namespace SteamNotificationsTray
             appContextMenu = new ContextMenu(new MenuItem[] {
                 loginMenuItem,
                 refreshMenuItem,
-                new MenuItem("Settings", (sender, e) =>
+                new MenuItem(Properties.Resources.Settings, (sender, e) =>
                 {
                     new SettingsForm().Show();
                 }),
-                new MenuItem("Exit", (sender, e) => {
+                new MenuItem(Properties.Resources.Exit, (sender, e) => {
                     Application.Exit();
                 })
             });
+
+            setupNotificationsPopup();
 
             refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
             refreshTimer.Tick += refreshTimer_Tick;
@@ -57,12 +61,16 @@ namespace SteamNotificationsTray
             countIcon.Visible = true;
             countIcon.Visible = false;
             mainIcon.ContextMenu = appContextMenu;
-            mainIcon.Text = "Steam Notifications Tray App";
+            mainIcon.Text = Properties.Resources.AppName;
             mainIcon.Visible = true;
             mainIcon.Visible = false;
 
+            mainIcon.MouseUp += notifyIcon_MouseUp;
+            mainIcon.MouseDown += notifyIcon_MouseDown;
             mainIcon.Click += notifyIcon_Click;
             mainIcon.DoubleClick += notifyIcon_DoubleClick;
+            countIcon.MouseUp += notifyIcon_MouseUp;
+            countIcon.MouseDown += notifyIcon_MouseDown;
             countIcon.Click += notifyIcon_Click;
             countIcon.DoubleClick += notifyIcon_DoubleClick;
 
@@ -170,7 +178,7 @@ namespace SteamNotificationsTray
                         string text = counts.TotalNotifications.ToString();
                         ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
 
-                        countIcon.Text = string.Format("{0} unread Steam notification{1}", counts.TotalNotifications, counts.TotalNotifications != 1 ? "s" : string.Empty);
+                        countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
 
                         if (!countIcon.Visible)
                         {
@@ -195,12 +203,12 @@ namespace SteamNotificationsTray
                 }
                 else
                 {
-                    markException("Error polling for notifications: " + ex.Message);
+                    markException(Properties.Resources.ErrorPolling + ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                markException("Exception: " + ex.Message);
+                markException(Properties.Resources.Exception + ex.Message);
             }
         }
 
@@ -226,6 +234,32 @@ namespace SteamNotificationsTray
                 ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
                 string text = client.CurrentCounts.TotalNotifications.ToString();
                 ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+            }
+        }
+
+        void notifyIcon_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mainIcon.ContextMenu = null;
+                mainIcon.ContextMenuStrip = notificationsContextMenu;
+                countIcon.ContextMenu = null;
+                countIcon.ContextMenuStrip = notificationsContextMenu;
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                mainIcon.ContextMenu = appContextMenu;
+                mainIcon.ContextMenuStrip = null;
+                countIcon.ContextMenu = appContextMenu;
+                countIcon.ContextMenuStrip = null;
+            }
+        }
+
+        void notifyIcon_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && sender is NotifyIcon)
+            {
+                NotifyIcon_ShowContextMenu.Invoke(sender, null);
             }
         }
 

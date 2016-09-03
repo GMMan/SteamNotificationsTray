@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrayAppPopup.cs" />
     <Compile Include="WebLogin\Models\DoLoginRequest.cs" />
     <Compile Include="WebLogin\Models\DoLoginResponse.cs" />
     <Compile Include="WebLogin\Models\GetRsaKeyResponse.cs" />

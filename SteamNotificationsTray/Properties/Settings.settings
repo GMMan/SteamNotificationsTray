@@ -17,5 +17,20 @@
     <Setting Name="RefreshInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">30000</Value>
     </Setting>
+    <Setting Name="NotificationPopupBackgroundColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">59, 57, 56</Value>
+    </Setting>
+    <Setting Name="NotificationPopupBorderColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">130, 128, 124</Value>
+    </Setting>
+    <Setting Name="NotificationInactiveColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">191, 191, 191</Value>
+    </Setting>
+    <Setting Name="NotificationFocusColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">33, 45, 61</Value>
+    </Setting>
+    <Setting Name="NotificationActiveColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">112, 186, 36</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
