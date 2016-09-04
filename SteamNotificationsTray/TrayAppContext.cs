@@ -203,6 +203,7 @@ namespace SteamNotificationsTray
                     hasNotifications = false;
                     countIcon.Visible = false;
                     ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
+                    mainIcon.Visible = true;
                 }
                 else
                 {
@@ -245,8 +246,8 @@ namespace SteamNotificationsTray
                         // Hide main icon first, then show in this order so the count is on the left
                         mainIcon.Visible = false;
                         countIcon.Visible = true;
-                        mainIcon.Visible = true;
                     }
+                    mainIcon.Visible = !Properties.Settings.Default.SingleIcon;
 
                     if (Properties.Settings.Default.EnableBalloons)
                     {

@@ -274,5 +274,17 @@ namespace SteamNotificationsTray.Properties {
                 this["EnableBalloons"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SingleIcon {
+            get {
+                return ((bool)(this["SingleIcon"]));
+            }
+            set {
+                this["SingleIcon"] = value;
+            }
+        }
     }
 }

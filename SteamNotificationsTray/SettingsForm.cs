@@ -41,6 +41,7 @@ namespace SteamNotificationsTray
             // Load general settings
             intervalNumericUpDown.Value = settings.RefreshInterval / 1000;
             enableBalloonsCheckBox.Checked = settings.EnableBalloons;
+            singleIconCheckBox.Checked = settings.SingleIcon;
 
             // Load item settings
             commentsCheckBox.Checked = settings.AlwaysShowComments;
@@ -106,6 +107,7 @@ namespace SteamNotificationsTray
             // Set general settings
             settings.RefreshInterval = (int)intervalNumericUpDown.Value * 1000;
             settings.EnableBalloons = enableBalloonsCheckBox.Checked;
+            settings.SingleIcon = singleIconCheckBox.Checked;
 
             // Set item settings
             settings.AlwaysShowComments = commentsCheckBox.Checked;

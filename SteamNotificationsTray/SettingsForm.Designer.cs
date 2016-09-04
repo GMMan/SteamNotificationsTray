@@ -76,6 +76,7 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
+            this.singleIconCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intervalNumericUpDown)).BeginInit();
@@ -102,6 +103,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.singleIconCheckBox);
             this.tabPage1.Controls.Add(this.resetbutton);
             this.tabPage1.Controls.Add(this.logoutButton);
             this.tabPage1.Controls.Add(this.intervalNumericUpDown);
@@ -121,7 +123,7 @@
             this.resetbutton.Location = new System.Drawing.Point(90, 251);
             this.resetbutton.Name = "resetbutton";
             this.resetbutton.Size = new System.Drawing.Size(75, 23);
-            this.resetbutton.TabIndex = 3;
+            this.resetbutton.TabIndex = 4;
             this.resetbutton.Text = "Reset";
             this.resetbutton.UseVisualStyleBackColor = true;
             this.resetbutton.Click += new System.EventHandler(this.resetbutton_Click);
@@ -132,7 +134,7 @@
             this.logoutButton.Location = new System.Drawing.Point(171, 251);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(75, 23);
-            this.logoutButton.TabIndex = 4;
+            this.logoutButton.TabIndex = 5;
             this.logoutButton.Text = "Log Out";
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
@@ -596,6 +598,16 @@
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
+            // singleIconCheckBox
+            // 
+            this.singleIconCheckBox.AutoSize = true;
+            this.singleIconCheckBox.Location = new System.Drawing.Point(6, 55);
+            this.singleIconCheckBox.Name = "singleIconCheckBox";
+            this.singleIconCheckBox.Size = new System.Drawing.Size(107, 17);
+            this.singleIconCheckBox.TabIndex = 3;
+            this.singleIconCheckBox.Text = "Single icon mode";
+            this.singleIconCheckBox.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.okButton;
@@ -676,6 +688,7 @@
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Label copyrightLabel;
         private System.Windows.Forms.Button resetbutton;
+        private System.Windows.Forms.CheckBox singleIconCheckBox;
     }
 }
 
