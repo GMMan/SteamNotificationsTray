@@ -143,5 +143,31 @@ namespace SteamNotificationsTray
             notificationsContextMenu.BackColor = settings.NotificationPopupBackgroundColor;
             notificationsContextMenu.ForeColor = settings.NotificationInactiveColor;
         }
+
+        void updatePopupCounts(NotificationCounts counts)
+        {
+            commentsMenuItem.Text = counts.Comments == 1 ? Resources.CommentsSingular : string.Format(Resources.CommentsPlural, counts.Comments);
+            commentsMenuItem.Tag = counts.Comments;
+            itemsMenuItem.Text = counts.Items == 1 ? Resources.ItemsSingular : string.Format(Resources.ItemsPlural, counts.Items);
+            itemsMenuItem.Tag = counts.Items;
+            invitesMenuItem.Text = counts.Invites == 1 ? Resources.InvitesSingular : string.Format(Resources.InvitesPlural, counts.Invites);
+            invitesMenuItem.Tag = counts.Invites;
+            giftsMenuItem.Text = counts.Gifts == 1 ? Resources.GiftsSingular : string.Format(Resources.GiftsPlural, counts.Gifts);
+            giftsMenuItem.Tag = counts.Gifts;
+            offlineMessagesMenuItem.Text = counts.OfflineMessages == 1 ? Resources.OfflineMessagesSingular : string.Format(Resources.OfflineMessagesPlural, counts.OfflineMessages);
+            offlineMessagesMenuItem.Tag = counts.OfflineMessages;
+            tradeOffersMenuItem.Text = counts.TradeOffers == 1 ? Resources.TradeOffersSingular : string.Format(Resources.TradeOffersPlural, counts.TradeOffers);
+            tradeOffersMenuItem.Tag = counts.TradeOffers;
+            tradeOffersSeparator.Visible = tradeOffersMenuItem.Visible = counts.TradeOffers > 0;
+            asyncGameMenuItem.Text = counts.AsyncGames == 1 ? Resources.AsyncGamesSingular : string.Format(Resources.AsyncGamesPlural, counts.AsyncGames);
+            asyncGameMenuItem.Tag = counts.AsyncGames;
+            asyncGameMenuSeparator.Visible = asyncGameMenuItem.Visible = counts.AsyncGames > 0;
+            moderatorMessageMenuItem.Text = counts.ModeratorMessages == 1 ? Resources.ModeratorMessagesSingular : string.Format(Resources.ModeratorMessagesPlural, counts.ModeratorMessages);
+            moderatorMessageMenuItem.Tag = counts.ModeratorMessages;
+            moderatorMessageSeparator.Visible = moderatorMessageMenuItem.Visible = counts.ModeratorMessages > 0;
+            helpRequestReplyMenuItem.Text = counts.HelpRequestReplies == 1 ? Resources.HelpRequestRepliesSingular : string.Format(Resources.HelpRequestRepliesPlural, counts.HelpRequestReplies);
+            helpRequestReplyMenuItem.Tag = counts.HelpRequestReplies;
+            helpRequestReplySeparator.Visible = helpRequestReplyMenuItem.Visible = counts.HelpRequestReplies > 0;
+        }
     }
 }

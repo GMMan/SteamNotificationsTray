@@ -24,6 +24,7 @@ namespace SteamNotificationsTray
         bool newNotifAcknowledged;
         bool hasNotifications;
         MethodInfo NotifyIcon_ShowContextMenu;
+        NotificationCounts countsDiff;
 
         public TrayAppContext()
         {
@@ -134,61 +135,7 @@ namespace SteamNotificationsTray
             try
             {
                 NotificationCounts counts = await client.PollNotificationCountsAsync();
-                if (counts != null)
-                {
-                    if (counts.TotalNotifications == 0)
-                    {
-                        hasNotifications = false;
-                        countIcon.Visible = false;
-                        ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
-                    }
-                    else
-                    {
-                        hasNotifications = true;
-                        NotificationCounts oldCounts = client.PrevCounts;
-                        Color newColor;
-                        if (oldCounts == null)
-                        {
-                            newNotifAcknowledged = true;
-                            newColor = Properties.Settings.Default.InboxAvailableColor;
-                        }
-                        else
-                        {
-                            if (counts.TotalNotifications > oldCounts.TotalNotifications)
-                            {
-                                newNotifAcknowledged = false;
-                                newColor = Properties.Settings.Default.InboxNewColor;
-                            }
-                            else if (counts.TotalNotifications == oldCounts.TotalNotifications)
-                            {
-                                newColor = newNotifAcknowledged ? Properties.Settings.Default.InboxAvailableColor : Properties.Settings.Default.InboxNewColor;
-                            }
-                            else
-                            {
-                                newNotifAcknowledged = true;
-                                newColor = Properties.Settings.Default.InboxAvailableColor;
-                            }                            
-                        }
-
-                        ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, newColor, SystemInformation.SmallIconSize));
-                        
-                        // 7 point for 3 digits
-                        // 8 point for 2 digits
-                        // 9 point for 1 digit
-                        string text = counts.TotalNotifications.ToString();
-                        ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
-
-                        countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
-
-                        if (!countIcon.Visible)
-                        {
-                            // Hide main icon first, then show in this order so the count is on the left
-                            mainIcon.Visible = false;
-                            countIcon.Visible = true;
-                            mainIcon.Visible = true;
-                        }
-                    }
-                }
+                if (counts != null) updateUi(counts);
             }
             catch (System.Net.Http.HttpRequestException ex)
             {
@@ -204,6 +151,93 @@ namespace SteamNotificationsTray
                 else
                 {
                     markException(Properties.Resources.ErrorPolling + ex.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                markException(Properties.Resources.Exception + ex.Message);
+            }
+        }
+
+        void updateUi(NotificationCounts counts)
+        {
+            try
+            {
+                if (client.PrevCounts == null)
+                {
+                    countsDiff = new NotificationCounts();
+                }
+                else
+                {
+                    var prev = client.PrevCounts;
+                    countsDiff = new NotificationCounts
+                    {
+                        Comments = counts.Comments - prev.Comments,
+                        Items = counts.Items - prev.Items,
+                        Invites = counts.Invites - prev.Invites,
+                        Gifts = counts.Gifts - prev.Gifts,
+                        OfflineMessages = counts.OfflineMessages - prev.OfflineMessages,
+                        TradeOffers = counts.TradeOffers - prev.TradeOffers,
+                        AsyncGames = counts.AsyncGames - prev.AsyncGames,
+                        ModeratorMessages = counts.ModeratorMessages - prev.ModeratorMessages,
+                        HelpRequestReplies = counts.HelpRequestReplies - prev.HelpRequestReplies,
+                        TotalNotifications = counts.TotalNotifications - prev.TotalNotifications,
+                    };
+                }
+
+                if (counts.TotalNotifications == 0)
+                {
+                    hasNotifications = false;
+                    countIcon.Visible = false;
+                    ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
+                }
+                else
+                {
+                    hasNotifications = true;
+                    NotificationCounts oldCounts = client.PrevCounts;
+                    updatePopupCounts(counts);
+                    Color newColor;
+                    if (oldCounts == null)
+                    {
+                        newNotifAcknowledged = true;
+                        newColor = Properties.Settings.Default.InboxAvailableColor;
+                    }
+                    else
+                    {
+                        if (counts.TotalNotifications > oldCounts.TotalNotifications)
+                        {
+                            newNotifAcknowledged = false;
+                            newColor = Properties.Settings.Default.InboxNewColor;
+                        }
+                        else if (counts.TotalNotifications == oldCounts.TotalNotifications)
+                        {
+                            newColor = newNotifAcknowledged ? Properties.Settings.Default.InboxAvailableColor : Properties.Settings.Default.InboxNewColor;
+                        }
+                        else
+                        {
+                            newNotifAcknowledged = true;
+                            newColor = Properties.Settings.Default.InboxAvailableColor;
+                        }
+                    }
+
+                    ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, newColor, SystemInformation.SmallIconSize));
+
+                    // 7 point for 3 digits
+                    // 8 point for 2 digits
+                    // 9 point for 1 digit
+                    string text = counts.TotalNotifications.ToString();
+                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
+
+                    countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
+
+
+                    if (!countIcon.Visible)
+                    {
+                        // Hide main icon first, then show in this order so the count is on the left
+                        mainIcon.Visible = false;
+                        countIcon.Visible = true;
+                        mainIcon.Visible = true;
+                    }
                 }
             }
             catch (Exception ex)
