@@ -61,15 +61,6 @@ namespace SteamNotificationsTray.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Steam Notifications Tray App.
-        /// </summary>
-        internal static string AppName {
-            get {
-                return ResourceManager.GetString("AppName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} new turns waiting.
         /// </summary>
         internal static string AsyncGamesPlural {
@@ -347,6 +338,15 @@ namespace SteamNotificationsTray.Properties {
             get {
                 object obj = ResourceManager.GetObject("NotificationDisabled", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not logged in.
+        /// </summary>
+        internal static string NotLoggedIn {
+            get {
+                return ResourceManager.GetString("NotLoggedIn", resourceCulture);
             }
         }
         

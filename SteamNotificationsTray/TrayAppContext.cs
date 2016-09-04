@@ -45,7 +45,10 @@ namespace SteamNotificationsTray
                 refreshMenuItem,
                 new MenuItem(Properties.Resources.Settings, (sender, e) =>
                 {
-                    new SettingsForm().Show();
+                    var settingsForm = new SettingsForm();
+                    settingsForm.SettingsApplied += settingsForm_SettingsApplied;
+                    settingsForm.LoggingOut += settingsForm_LoggingOut;
+                    settingsForm.Show();
                 }),
                 new MenuItem(Properties.Resources.Exit, (sender, e) => {
                     Application.Exit();
@@ -62,7 +65,7 @@ namespace SteamNotificationsTray
             countIcon.Visible = true;
             countIcon.Visible = false;
             mainIcon.ContextMenu = appContextMenu;
-            mainIcon.Text = Properties.Resources.AppName;
+            mainIcon.Text = Application.ProductName;
             mainIcon.Visible = true;
             mainIcon.Visible = false;
 
@@ -142,11 +145,7 @@ namespace SteamNotificationsTray
                 if (ex.Message.Contains("401"))
                 {
                     // Login info expired
-                    refreshTimer.Stop();
-                    ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDisabled, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
-                    countIcon.Visible = false;
-                    loginMenuItem.Visible = true;
-                    refreshMenuItem.Visible = false;
+                    logOut();
                 }
                 else
                 {
@@ -157,6 +156,16 @@ namespace SteamNotificationsTray
             {
                 markException(Properties.Resources.Exception + ex.Message);
             }
+        }
+
+        void logOut()
+        {
+            refreshTimer.Stop();
+            ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDisabled, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
+            countIcon.Visible = false;
+            loginMenuItem.Visible = true;
+            refreshMenuItem.Visible = false;
+            markException(Properties.Resources.NotLoggedIn);
         }
 
         void updateUi(NotificationCounts counts)
@@ -186,7 +195,7 @@ namespace SteamNotificationsTray
                 }
 
                 updatePopupCounts(counts);
-                mainIcon.Text = Properties.Resources.AppName;
+                mainIcon.Text = Application.ProductName;
                 countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
 
                 if (counts.TotalNotifications == 0)
@@ -328,6 +337,19 @@ namespace SteamNotificationsTray
         void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("steam://open/main");
+        }
+
+        void settingsForm_SettingsApplied(object sender, EventArgs e)
+        {
+            refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
+            updatePopupColors();
+            updateUi(client.CurrentCounts);
+        }
+
+        void settingsForm_LoggingOut(object sender, EventArgs e)
+        {
+            logOut();
+            client.SetCookies(null);
         }
 
         protected override void ExitThreadCore()
