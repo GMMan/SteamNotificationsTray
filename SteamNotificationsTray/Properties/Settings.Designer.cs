@@ -154,5 +154,125 @@ namespace SteamNotificationsTray.Properties {
                 this["NotificationPopupSeparatorColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlwaysShowComments {
+            get {
+                return ((bool)(this["AlwaysShowComments"]));
+            }
+            set {
+                this["AlwaysShowComments"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlwaysShowItems {
+            get {
+                return ((bool)(this["AlwaysShowItems"]));
+            }
+            set {
+                this["AlwaysShowItems"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlwaysShowInvites {
+            get {
+                return ((bool)(this["AlwaysShowInvites"]));
+            }
+            set {
+                this["AlwaysShowInvites"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlwaysShowGifts {
+            get {
+                return ((bool)(this["AlwaysShowGifts"]));
+            }
+            set {
+                this["AlwaysShowGifts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlwaysShowOfflineMessages {
+            get {
+                return ((bool)(this["AlwaysShowOfflineMessages"]));
+            }
+            set {
+                this["AlwaysShowOfflineMessages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlwaysShowTradeOffers {
+            get {
+                return ((bool)(this["AlwaysShowTradeOffers"]));
+            }
+            set {
+                this["AlwaysShowTradeOffers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlwaysShowAsyncGames {
+            get {
+                return ((bool)(this["AlwaysShowAsyncGames"]));
+            }
+            set {
+                this["AlwaysShowAsyncGames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlwaysShowModeratorMessages {
+            get {
+                return ((bool)(this["AlwaysShowModeratorMessages"]));
+            }
+            set {
+                this["AlwaysShowModeratorMessages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlwaysShowHelpRequestReplies {
+            get {
+                return ((bool)(this["AlwaysShowHelpRequestReplies"]));
+            }
+            set {
+                this["AlwaysShowHelpRequestReplies"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Setting {
+            get {
+                return ((bool)(this["Setting"]));
+            }
+            set {
+                this["Setting"] = value;
+            }
+        }
     }
 }
