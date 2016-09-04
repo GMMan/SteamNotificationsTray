@@ -13,7 +13,6 @@ namespace SteamNotificationsTray
 {
     partial class TrayAppContext : ApplicationContext
     {
-        WindowsFormsSynchronizationContext syncContext;
         NotifyIcon mainIcon = new NotifyIcon();
         NotifyIcon countIcon = new NotifyIcon();
         ContextMenu appContextMenu;
@@ -29,7 +28,6 @@ namespace SteamNotificationsTray
         public TrayAppContext()
         {
             NotifyIcon_ShowContextMenu = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance);
-            syncContext = new WindowsFormsSynchronizationContext();
 
             loginMenuItem = new MenuItem(Properties.Resources.LogIn, (sender, e) =>
             {
