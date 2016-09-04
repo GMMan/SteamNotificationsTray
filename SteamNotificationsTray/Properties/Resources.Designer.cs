@@ -312,6 +312,15 @@ namespace SteamNotificationsTray.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New notifications since last check:.
+        /// </summary>
+        internal static string NewNotifsSince {
+            get {
+                return ResourceManager.GetString("NewNotifsSince", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon NotificationActive {

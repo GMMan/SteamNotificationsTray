@@ -105,7 +105,7 @@ namespace SteamNotificationsTray
             else
                 Application.Exit(); // Login canceled, exit
         }
-        
+
         void finishSetup()
         {
             // Set up cookies
@@ -238,6 +238,34 @@ namespace SteamNotificationsTray
                         countIcon.Visible = true;
                         mainIcon.Visible = true;
                     }
+
+                    if (Properties.Settings.Default.EnableBalloons)
+                    {
+                        List<string> notifications = new List<string>();
+                        if (countsDiff.Comments > 0) notifications.Add(countsDiff.Comments == 1 ? Properties.Resources.CommentsSingular : string.Format(Properties.Resources.CommentsPlural, countsDiff.Comments));
+                        if (countsDiff.Items > 0) notifications.Add(countsDiff.Items == 1 ? Properties.Resources.ItemsSingular : string.Format(Properties.Resources.ItemsPlural, countsDiff.Items));
+                        if (countsDiff.Invites > 0) notifications.Add(countsDiff.Invites == 1 ? Properties.Resources.InvitesSingular : string.Format(Properties.Resources.InvitesPlural, countsDiff.Invites));
+                        if (countsDiff.Gifts > 0) notifications.Add(countsDiff.Gifts == 1 ? Properties.Resources.GiftsSingular : string.Format(Properties.Resources.GiftsPlural, countsDiff.Gifts));
+                        if (countsDiff.OfflineMessages > 0) notifications.Add(countsDiff.OfflineMessages == 1 ? Properties.Resources.OfflineMessagesSingular : string.Format(Properties.Resources.OfflineMessagesPlural, countsDiff.OfflineMessages));
+                        if (countsDiff.TradeOffers > 0) notifications.Add(countsDiff.TradeOffers == 1 ? Properties.Resources.TradeOffersSingular : string.Format(Properties.Resources.TradeOffersPlural, countsDiff.TradeOffers));
+                        if (countsDiff.AsyncGames > 0) notifications.Add(countsDiff.AsyncGames == 1 ? Properties.Resources.AsyncGamesSingular : string.Format(Properties.Resources.AsyncGamesPlural, countsDiff.AsyncGames));
+                        if (countsDiff.ModeratorMessages > 0) notifications.Add(countsDiff.ModeratorMessages == 1 ? Properties.Resources.ModeratorMessagesSingular : string.Format(Properties.Resources.ModeratorMessagesPlural, countsDiff.ModeratorMessages));
+                        if (countsDiff.HelpRequestReplies > 0) notifications.Add(countsDiff.HelpRequestReplies == 1 ? Properties.Resources.HelpRequestRepliesSingular : string.Format(Properties.Resources.HelpRequestRepliesPlural, countsDiff.HelpRequestReplies));
+
+                        if (notifications.Count > 0)
+                        {
+                            countIcon.BalloonTipIcon = ToolTipIcon.Info;
+                            countIcon.BalloonTipTitle = countIcon.Text;
+
+                            StringBuilder sb = new StringBuilder();
+                            sb.AppendLine(Properties.Resources.NewNotifsSince);
+                            sb.AppendLine();
+                            foreach (string notif in notifications)
+                                sb.AppendLine(notif);
+                            countIcon.BalloonTipText = sb.ToString();
+                            countIcon.ShowBalloonTip(10000); // Per MSDN, timeout doesn't make a difference (since Vista)
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -301,7 +329,7 @@ namespace SteamNotificationsTray
         {
             System.Diagnostics.Process.Start("steam://open/main");
         }
-       
+
         protected override void ExitThreadCore()
         {
             mainIcon.Visible = false;

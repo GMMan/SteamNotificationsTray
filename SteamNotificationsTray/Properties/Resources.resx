@@ -199,6 +199,9 @@
   <data name="ModeratorMessagesSingular" xml:space="preserve">
     <value>1 community moderation message</value>
   </data>
+  <data name="NewNotifsSince" xml:space="preserve">
+    <value>New notifications since last check:</value>
+  </data>
   <data name="NotificationActive" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\graphics\inbox_notification.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
