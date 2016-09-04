@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 using SteamNotificationsTray.Properties;
 
 namespace SteamNotificationsTray
@@ -135,6 +136,61 @@ namespace SteamNotificationsTray
             });
 
             updatePopupColors();
+
+            commentsMenuItem.Click += commentsMenuItem_Click;
+            itemsMenuItem.Click += itemsMenuItem_Click;
+            invitesMenuItem.Click += invitesMenuItem_Click;
+            giftsMenuItem.Click += giftsMenuItem_Click;
+            offlineMessagesMenuItem.Click += offlineMessagesMenuItem_Click;
+            tradeOffersMenuItem.Click += tradeOffersMenuItem_Click;
+            asyncGameMenuItem.Click += asyncGameMenuItem_Click;
+            moderatorMessageMenuItem.Click += moderatorMessageMenuItem_Click;
+            helpRequestReplyMenuItem.Click += helpRequestReplyMenuItem_Click;
+        }
+
+        void commentsMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/commentnotifications/");
+        }
+
+        void itemsMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/inventory/");
+        }
+
+        void invitesMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/home/invites/");
+        }
+
+        void giftsMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/inventory/#pending_gifts");
+        }
+
+        void offlineMessagesMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/chat/");
+        }
+
+        void tradeOffersMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/tradeoffers/");
+        }
+
+        void asyncGameMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/gamenotifications");
+        }
+
+        void moderatorMessageMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/my/moderatormessages");
+        }
+
+        void helpRequestReplyMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://help.steampowered.com/en/wizard/HelpRequests");
         }
 
         void updatePopupColors()
