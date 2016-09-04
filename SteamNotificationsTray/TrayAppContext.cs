@@ -71,11 +71,9 @@ namespace SteamNotificationsTray
             mainIcon.MouseDown += notifyIcon_MouseDown;
             mainIcon.MouseClick += notifyIcon_MouseClick;
             mainIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
-            mainIcon.Click += notifyIcon_Click;
             countIcon.MouseDown += notifyIcon_MouseDown;
             countIcon.MouseClick += notifyIcon_MouseClick;
             countIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
-            countIcon.Click += notifyIcon_Click;
 
             // If no cookies available, show login form
             //CredentialStore.ClearCredentials();
@@ -299,18 +297,6 @@ namespace SteamNotificationsTray
             }
         }
 
-        void notifyIcon_Click(object sender, EventArgs e)
-        {
-            if (hasNotifications)
-            {
-                // Make icon normal colored
-                newNotifAcknowledged = true;
-                ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
-                string text = client.CurrentCounts.TotalNotifications.ToString();
-                ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
-            }
-        }
-
         void notifyIcon_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -331,9 +317,18 @@ namespace SteamNotificationsTray
 
         void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && sender is NotifyIcon && refreshTimer.Enabled)
+            if (e.Button == MouseButtons.Left)
             {
-                NotifyIcon_ShowContextMenu.Invoke(sender, null);
+                if (hasNotifications)
+                {
+                    // Make icon normal colored
+                    newNotifAcknowledged = true;
+                    ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+                    string text = client.CurrentCounts.TotalNotifications.ToString();
+                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+                }
+
+                if (sender is NotifyIcon && refreshTimer.Enabled) NotifyIcon_ShowContextMenu.Invoke(sender, null);
             }
         }
 
