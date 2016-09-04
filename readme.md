@@ -6,6 +6,11 @@ does on Steam. From there you can click on the notification item, and it
 will open the matching page in your browser. Double click on the icon to
 open Steam.
 
+You will most likely need to tell Windows to not hide the icons for the
+two icons' positions to stay fixed. Best to do this when you have a
+notification. The intended order is for the count to come first, and the
+mail icon to come second, the same way it's displayed on Steam.
+
 System requirements
 -------------------
 Requires .NET Framework 4.5.1.
