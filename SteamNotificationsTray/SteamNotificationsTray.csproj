@@ -67,6 +67,8 @@
     </Compile>
     <Compile Include="NotificationsClient.cs" />
     <Compile Include="NotificationCounts.cs" />
+    <Compile Include="NotificationsMenuColorTable.cs" />
+    <Compile Include="NotificationsMenuRenderer.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +117,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="graphics\inbox_tradeoffers.png" />
+    <None Include="graphics\inbox_offlinemessages.png" />
+    <None Include="graphics\inbox_moderator_message.png" />
+    <None Include="graphics\inbox_items.png" />
+    <None Include="graphics\inbox_invites.png" />
+    <None Include="graphics\inbox_gifts.png" />
+    <None Include="graphics\inbox_comments.png" />
+    <None Include="graphics\inbox_async_game.png" />
     <None Include="graphics\inbox_notification_inactive_disabled.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

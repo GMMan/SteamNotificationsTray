@@ -32,5 +32,8 @@
     <Setting Name="NotificationActiveColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">112, 186, 36</Value>
     </Setting>
+    <Setting Name="NotificationPopupSeparatorColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">107, 104, 101</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

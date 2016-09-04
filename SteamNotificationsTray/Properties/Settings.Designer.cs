@@ -142,5 +142,17 @@ namespace SteamNotificationsTray.Properties {
                 this["NotificationActiveColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("107, 104, 101")]
+        public global::System.Drawing.Color NotificationPopupSeparatorColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationPopupSeparatorColor"]));
+            }
+            set {
+                this["NotificationPopupSeparatorColor"] = value;
+            }
+        }
     }
 }
