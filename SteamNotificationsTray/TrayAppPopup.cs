@@ -36,81 +36,47 @@ namespace SteamNotificationsTray
         {
             commentsMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.CommentsPlural, 0),
                 Image = Resources.IconComments
             };
             itemsSeparator = new ToolStripSeparator();
             itemsMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.ItemsPlural, 0),
                 Image = Resources.IconItems
             };
             invitesSeparator = new ToolStripSeparator();
             invitesMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.InvitesPlural, 0),
                 Image = Resources.IconInvites
             };
             giftsSeparator = new ToolStripSeparator();
             giftsMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.GiftsPlural, 0),
                 Image = Resources.IconGifts
             };
             offlineMessagesSeparator = new ToolStripSeparator();
             offlineMessagesMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.OfflineMessagesPlural, 0),
                 Image = Resources.IconOfflineMessages,
             };
-            tradeOffersSeparator = new ToolStripSeparator
-            {
-                Visible = false
-            };
+            tradeOffersSeparator = new ToolStripSeparator();
             tradeOffersMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.TradeOffersPlural, 0),
                 Image = Resources.IconTradeOffers,
-                Visible = false
             };
-            asyncGameMenuSeparator = new ToolStripSeparator
-            {
-                Visible = false
-            };
+            asyncGameMenuSeparator = new ToolStripSeparator();
             asyncGameMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.AsyncGamesPlural, 0),
                 Image = Resources.IconAsyncGames,
-                Visible = false
             };
-            moderatorMessageSeparator = new ToolStripSeparator
-            {
-                Visible = false
-            };
+            moderatorMessageSeparator = new ToolStripSeparator();
             moderatorMessageMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.ModeratorMessagesPlural, 0),
                 Image = Resources.IconModeratorMessages,
-                Visible = false
             };
-            helpRequestReplySeparator = new ToolStripSeparator
-            {
-                Visible = false
-            };
+            helpRequestReplySeparator = new ToolStripSeparator();
             helpRequestReplyMenuItem = new ToolStripMenuItem
             {
-                Tag = 0,
-                Text = string.Format(Resources.HelpRequestRepliesPlural, 0),
                 Image = Resources.IconModeratorMessages,
-                Visible = false
             };
             renderer = new NotificationsMenuRenderer();
             notificationsContextMenu = new ContextMenuStrip();
@@ -136,6 +102,7 @@ namespace SteamNotificationsTray
             });
 
             updatePopupColors();
+            updatePopupCounts(new NotificationCounts());
 
             commentsMenuItem.Click += commentsMenuItem_Click;
             itemsMenuItem.Click += itemsMenuItem_Click;
