@@ -185,6 +185,10 @@ namespace SteamNotificationsTray
                     };
                 }
 
+                updatePopupCounts(counts);
+                mainIcon.Text = Properties.Resources.AppName;
+                countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
+
                 if (counts.TotalNotifications == 0)
                 {
                     hasNotifications = false;
@@ -195,7 +199,6 @@ namespace SteamNotificationsTray
                 {
                     hasNotifications = true;
                     NotificationCounts oldCounts = client.PrevCounts;
-                    updatePopupCounts(counts);
                     Color newColor;
                     if (oldCounts == null)
                     {
@@ -227,9 +230,6 @@ namespace SteamNotificationsTray
                     // 9 point for 1 digit
                     string text = counts.TotalNotifications.ToString();
                     ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
-
-                    countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
-
 
                     if (!countIcon.Visible)
                     {
