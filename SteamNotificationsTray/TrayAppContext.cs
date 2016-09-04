@@ -328,7 +328,7 @@ namespace SteamNotificationsTray
 
         void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && sender is NotifyIcon)
+            if (e.Button == MouseButtons.Left && sender is NotifyIcon && refreshTimer.Enabled)
             {
                 NotifyIcon_ShowContextMenu.Invoke(sender, null);
             }
@@ -344,6 +344,12 @@ namespace SteamNotificationsTray
             refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
             updatePopupColors();
             updateUi(client.CurrentCounts);
+            if (!refreshTimer.Enabled)
+            {
+                // Logged out, hide count and show main
+                countIcon.Visible = false;
+                mainIcon.Visible = true;
+            }
         }
 
         void settingsForm_LoggingOut(object sender, EventArgs e)
