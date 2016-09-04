@@ -70,5 +70,10 @@ namespace SteamNotificationsTray
         {
             this.cookies = cookies;
         }
+
+        public void SaveCredentials()
+        {
+            if (cookies != null) CredentialStore.SaveCommunityCookies(cookies);
+        }
     }
 }

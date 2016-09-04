@@ -49,6 +49,7 @@ namespace SteamNotificationsTray
                     settingsForm.Show();
                 }),
                 new MenuItem(Properties.Resources.Exit, (sender, e) => {
+                    client.SaveCredentials();
                     Application.Exit();
                 })
             });
