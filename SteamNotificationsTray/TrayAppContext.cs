@@ -160,6 +160,9 @@ namespace SteamNotificationsTray
         void logOut()
         {
             refreshTimer.Stop();
+            client.SetCookies(null);
+            Properties.Settings.Default.Credentials = null;
+            Properties.Settings.Default.Save();
             ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDisabled, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
             countIcon.Visible = false;
             loginMenuItem.Visible = true;
