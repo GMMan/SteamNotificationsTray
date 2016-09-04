@@ -65,12 +65,12 @@ namespace SteamNotificationsTray
             mainIcon.Visible = true;
             mainIcon.Visible = false;
 
-            mainIcon.MouseUp += notifyIcon_MouseUp;
             mainIcon.MouseDown += notifyIcon_MouseDown;
+            mainIcon.MouseClick += notifyIcon_MouseClick;
             mainIcon.Click += notifyIcon_Click;
             mainIcon.DoubleClick += notifyIcon_DoubleClick;
-            countIcon.MouseUp += notifyIcon_MouseUp;
             countIcon.MouseDown += notifyIcon_MouseDown;
+            countIcon.MouseClick += notifyIcon_MouseClick;
             countIcon.Click += notifyIcon_Click;
             countIcon.DoubleClick += notifyIcon_DoubleClick;
 
@@ -255,7 +255,7 @@ namespace SteamNotificationsTray
             }
         }
 
-        void notifyIcon_MouseUp(object sender, MouseEventArgs e)
+        void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && sender is NotifyIcon)
             {
