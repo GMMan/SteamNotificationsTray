@@ -70,12 +70,12 @@ namespace SteamNotificationsTray
 
             mainIcon.MouseDown += notifyIcon_MouseDown;
             mainIcon.MouseClick += notifyIcon_MouseClick;
+            mainIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
             mainIcon.Click += notifyIcon_Click;
-            mainIcon.DoubleClick += notifyIcon_DoubleClick;
             countIcon.MouseDown += notifyIcon_MouseDown;
             countIcon.MouseClick += notifyIcon_MouseClick;
+            countIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
             countIcon.Click += notifyIcon_Click;
-            countIcon.DoubleClick += notifyIcon_DoubleClick;
 
             // If no cookies available, show login form
             //CredentialStore.ClearCredentials();
@@ -337,9 +337,12 @@ namespace SteamNotificationsTray
             }
         }
 
-        void notifyIcon_DoubleClick(object sender, EventArgs e)
+        void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            System.Diagnostics.Process.Start("steam://open/main");
+            if (e.Button == MouseButtons.Left)
+            {
+                System.Diagnostics.Process.Start("steam://open/main");
+            }
         }
 
         void settingsForm_SettingsApplied(object sender, EventArgs e)
