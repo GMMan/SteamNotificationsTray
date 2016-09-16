@@ -197,6 +197,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.accountAlertsCheckBox);
             this.tabPage2.Controls.Add(this.helpRequestRepliesCheckBox);
             this.tabPage2.Controls.Add(this.moderatorMessagesCheckBox);
@@ -317,6 +318,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.AutoScroll = true;
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label10);
