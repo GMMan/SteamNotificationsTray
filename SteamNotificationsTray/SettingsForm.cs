@@ -53,6 +53,7 @@ namespace SteamNotificationsTray
             asyncGamesCheckBox.Checked = settings.AlwaysShowAsyncGames;
             moderatorMessagesCheckBox.Checked = settings.AlwaysShowModeratorMessages;
             helpRequestRepliesCheckBox.Checked = settings.AlwaysShowHelpRequestReplies;
+            accountAlertsCheckBox.Checked = settings.AlwaysShowAccountAlerts;
 
             // Load colors
             noNotifsButton.BackColor = settings.InboxNoneColor;
@@ -119,6 +120,7 @@ namespace SteamNotificationsTray
             settings.AlwaysShowAsyncGames = asyncGamesCheckBox.Checked;
             settings.AlwaysShowModeratorMessages = moderatorMessagesCheckBox.Checked;
             settings.AlwaysShowHelpRequestReplies = helpRequestRepliesCheckBox.Checked;
+            settings.AlwaysShowAccountAlerts = accountAlertsCheckBox.Checked;
 
             // Set colors
             settings.InboxNoneColor = noNotifsButton.BackColor;

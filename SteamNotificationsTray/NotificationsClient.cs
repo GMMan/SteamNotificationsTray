@@ -57,6 +57,9 @@ namespace SteamNotificationsTray
                         case "10":
                             counts.HelpRequestReplies = (int)notif.Value;
                             break;
+                        case "11":
+                            counts.AccountAlerts = (int)notif.Value;
+                            break;
                     }
                     counts.TotalNotifications += (int)notif.Value;
                 }

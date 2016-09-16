@@ -31,6 +31,8 @@ namespace SteamNotificationsTray
         ToolStripMenuItem moderatorMessageMenuItem;
         ToolStripSeparator helpRequestReplySeparator;
         ToolStripMenuItem helpRequestReplyMenuItem;
+        ToolStripSeparator accountAlertReplySeparator;
+        ToolStripMenuItem accountAlertReplyMenuItem;
 
         void setupNotificationsPopup()
         {
@@ -78,6 +80,11 @@ namespace SteamNotificationsTray
             {
                 Image = Resources.IconModeratorMessages,
             };
+            accountAlertReplySeparator = new ToolStripSeparator();
+            accountAlertReplyMenuItem = new ToolStripMenuItem
+            {
+                Image = Resources.IconAccountAlerts,
+            };
             renderer = new NotificationsMenuRenderer();
             notificationsContextMenu = new ContextMenuStrip();
             notificationsContextMenu.Renderer = renderer;
@@ -99,6 +106,8 @@ namespace SteamNotificationsTray
                  moderatorMessageMenuItem,
                  helpRequestReplySeparator,
                  helpRequestReplyMenuItem,
+                 accountAlertReplySeparator,
+                 accountAlertReplyMenuItem,
             });
 
             updatePopupColors();
@@ -113,6 +122,7 @@ namespace SteamNotificationsTray
             asyncGameMenuItem.Click += asyncGameMenuItem_Click;
             moderatorMessageMenuItem.Click += moderatorMessageMenuItem_Click;
             helpRequestReplyMenuItem.Click += helpRequestReplyMenuItem_Click;
+            accountAlertReplyMenuItem.Click += accountAlertReplyMenuItem_Click;
         }
 
         void commentsMenuItem_Click(object sender, EventArgs e)
@@ -160,6 +170,11 @@ namespace SteamNotificationsTray
             Process.Start("https://help.steampowered.com/en/wizard/HelpRequests");
         }
 
+        void accountAlertReplyMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://store.steampowered.com/supportmessages/");
+        }
+
         void updatePopupColors()
         {
             var settings = Settings.Default;
@@ -205,6 +220,10 @@ namespace SteamNotificationsTray
             helpRequestReplyMenuItem.Text = counts.HelpRequestReplies == 1 ? Resources.HelpRequestRepliesSingular : string.Format(Resources.HelpRequestRepliesPlural, counts.HelpRequestReplies);
             helpRequestReplyMenuItem.Tag = counts.HelpRequestReplies;
             helpRequestReplySeparator.Available = helpRequestReplyMenuItem.Available = counts.HelpRequestReplies > 0 || settings.AlwaysShowHelpRequestReplies;
+
+            accountAlertReplyMenuItem.Text = counts.AccountAlerts == 1 ? Resources.AccountAlertsSingular : string.Format(Resources.AccountAlertsPlural, counts.AccountAlerts);
+            accountAlertReplyMenuItem.Tag = counts.AccountAlerts;
+            accountAlertReplySeparator.Available = accountAlertReplyMenuItem.Available = counts.AccountAlerts > 0 || settings.AlwaysShowAccountAlerts;
 
             // Hide top separator if it's the first item
             foreach (ToolStripItem item in notificationsContextMenu.Items)

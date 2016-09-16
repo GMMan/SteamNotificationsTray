@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <None Include="graphics\inbox_account_alert.png" />
     <Content Include="thirdparty\Cyotek.Windows.Forms.ColorPicker.dll" />
     <None Include="graphics\inbox_tradeoffers.png" />
     <None Include="graphics\inbox_offlinemessages.png" />

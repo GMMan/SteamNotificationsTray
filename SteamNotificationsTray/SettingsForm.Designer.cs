@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.singleIconCheckBox = new System.Windows.Forms.CheckBox();
             this.resetbutton = new System.Windows.Forms.Button();
             this.logoutButton = new System.Windows.Forms.Button();
             this.intervalNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -76,7 +77,7 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.singleIconCheckBox = new System.Windows.Forms.CheckBox();
+            this.accountAlertsCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intervalNumericUpDown)).BeginInit();
@@ -116,6 +117,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // singleIconCheckBox
+            // 
+            this.singleIconCheckBox.AutoSize = true;
+            this.singleIconCheckBox.Location = new System.Drawing.Point(6, 55);
+            this.singleIconCheckBox.Name = "singleIconCheckBox";
+            this.singleIconCheckBox.Size = new System.Drawing.Size(107, 17);
+            this.singleIconCheckBox.TabIndex = 3;
+            this.singleIconCheckBox.Text = "Single icon mode";
+            this.singleIconCheckBox.UseVisualStyleBackColor = true;
             // 
             // resetbutton
             // 
@@ -186,6 +197,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.accountAlertsCheckBox);
             this.tabPage2.Controls.Add(this.helpRequestRepliesCheckBox);
             this.tabPage2.Controls.Add(this.moderatorMessagesCheckBox);
             this.tabPage2.Controls.Add(this.asyncGamesCheckBox);
@@ -598,15 +610,15 @@
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
-            // singleIconCheckBox
+            // accountAlertsCheckBox
             // 
-            this.singleIconCheckBox.AutoSize = true;
-            this.singleIconCheckBox.Location = new System.Drawing.Point(6, 55);
-            this.singleIconCheckBox.Name = "singleIconCheckBox";
-            this.singleIconCheckBox.Size = new System.Drawing.Size(107, 17);
-            this.singleIconCheckBox.TabIndex = 3;
-            this.singleIconCheckBox.Text = "Single icon mode";
-            this.singleIconCheckBox.UseVisualStyleBackColor = true;
+            this.accountAlertsCheckBox.AutoSize = true;
+            this.accountAlertsCheckBox.Location = new System.Drawing.Point(6, 226);
+            this.accountAlertsCheckBox.Name = "accountAlertsCheckBox";
+            this.accountAlertsCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.accountAlertsCheckBox.TabIndex = 10;
+            this.accountAlertsCheckBox.Text = "Account Alerts";
+            this.accountAlertsCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -689,6 +701,7 @@
         private System.Windows.Forms.Label copyrightLabel;
         private System.Windows.Forms.Button resetbutton;
         private System.Windows.Forms.CheckBox singleIconCheckBox;
+        private System.Windows.Forms.CheckBox accountAlertsCheckBox;
     }
 }
 

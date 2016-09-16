@@ -61,6 +61,24 @@ namespace SteamNotificationsTray.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} account alerts.
+        /// </summary>
+        internal static string AccountAlertsPlural {
+            get {
+                return ResourceManager.GetString("AccountAlertsPlural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 account alert.
+        /// </summary>
+        internal static string AccountAlertsSingular {
+            get {
+                return ResourceManager.GetString("AccountAlertsSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} new turns waiting.
         /// </summary>
         internal static string AsyncGamesPlural {
@@ -156,6 +174,16 @@ namespace SteamNotificationsTray.Properties {
         internal static string HelpRequestRepliesSingular {
             get {
                 return ResourceManager.GetString("HelpRequestRepliesSingular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IconAccountAlerts {
+            get {
+                object obj = ResourceManager.GetObject("IconAccountAlerts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
