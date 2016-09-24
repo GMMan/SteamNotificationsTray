@@ -28,7 +28,7 @@ namespace SteamNotificationsTray
             }
         }
 
-        public static Icon CreateIconWithText(string text, Font font, Color background, Size size)
+        public static Icon CreateIconWithText(string text, Font font, Color textColor, Color background, Size size)
         {
             using (Bitmap bmp = new Bitmap(size.Width, size.Height, PixelFormat.Format32bppArgb))
             {
@@ -38,7 +38,7 @@ namespace SteamNotificationsTray
                     SizeF textSize = g.MeasureString(text, font);
                     int textXPos = (bmp.Width - (int)Math.Ceiling(textSize.Width)) / 2;
                     int textYPos = (bmp.Height - (int)Math.Ceiling(textSize.Height)) / 2;
-                    g.DrawString(text, font, Brushes.White, new PointF(textXPos, textYPos));
+                    g.DrawString(text, font, new SolidBrush(textColor), new PointF(textXPos, textYPos));
                     g.Flush();
                 }
 

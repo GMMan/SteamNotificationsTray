@@ -239,7 +239,8 @@ namespace SteamNotificationsTray
                     // 8 point for 2 digits
                     // 9 point for 1 digit
                     string text = counts.TotalNotifications.ToString();
-                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), newColor, SystemInformation.SmallIconSize));
+                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point),
+                        Properties.Settings.Default.NotificationCountColor, newColor, SystemInformation.SmallIconSize));
 
                     if (!countIcon.Visible)
                     {
@@ -325,7 +326,8 @@ namespace SteamNotificationsTray
                     newNotifAcknowledged = true;
                     ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
                     string text = client.CurrentCounts.TotalNotifications.ToString();
-                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point), Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point),
+                        Properties.Settings.Default.NotificationCountColor, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
                 }
 
                 if (sender is NotifyIcon && refreshTimer.Enabled) NotifyIcon_ShowContextMenu.Invoke(sender, null);
