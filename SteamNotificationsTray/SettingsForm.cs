@@ -65,6 +65,7 @@ namespace SteamNotificationsTray
             borderButton.BackColor = settings.NotificationPopupBorderColor;
             focusedButton.BackColor = settings.NotificationFocusColor;
             separatorButton.BackColor = settings.NotificationPopupSeparatorColor;
+            countColorButton.BackColor = settings.NotificationCountColor;
         }
 
         private void resetbutton_Click(object sender, EventArgs e)
@@ -132,6 +133,7 @@ namespace SteamNotificationsTray
             settings.NotificationPopupBorderColor = borderButton.BackColor;
             settings.NotificationFocusColor = focusedButton.BackColor;
             settings.NotificationPopupSeparatorColor = separatorButton.BackColor;
+            settings.NotificationCountColor = countColorButton.BackColor;
 
             settings.Save();
             var handler = SettingsApplied;

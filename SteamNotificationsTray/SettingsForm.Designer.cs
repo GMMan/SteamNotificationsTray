@@ -38,6 +38,7 @@
             this.enableBalloonsCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.accountAlertsCheckBox = new System.Windows.Forms.CheckBox();
             this.helpRequestRepliesCheckBox = new System.Windows.Forms.CheckBox();
             this.moderatorMessagesCheckBox = new System.Windows.Forms.CheckBox();
             this.asyncGamesCheckBox = new System.Windows.Forms.CheckBox();
@@ -77,7 +78,8 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.accountAlertsCheckBox = new System.Windows.Forms.CheckBox();
+            this.countColorButton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intervalNumericUpDown)).BeginInit();
@@ -99,7 +101,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(260, 306);
+            this.tabControl1.Size = new System.Drawing.Size(260, 334);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -217,6 +219,16 @@
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // accountAlertsCheckBox
+            // 
+            this.accountAlertsCheckBox.AutoSize = true;
+            this.accountAlertsCheckBox.Location = new System.Drawing.Point(6, 226);
+            this.accountAlertsCheckBox.Name = "accountAlertsCheckBox";
+            this.accountAlertsCheckBox.Size = new System.Drawing.Size(95, 17);
+            this.accountAlertsCheckBox.TabIndex = 10;
+            this.accountAlertsCheckBox.Text = "Account Alerts";
+            this.accountAlertsCheckBox.UseVisualStyleBackColor = true;
+            // 
             // helpRequestRepliesCheckBox
             // 
             this.helpRequestRepliesCheckBox.AutoSize = true;
@@ -319,6 +331,8 @@
             // tabPage3
             // 
             this.tabPage3.AutoScroll = true;
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.countColorButton);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label10);
@@ -341,7 +355,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(252, 280);
+            this.tabPage3.Size = new System.Drawing.Size(252, 308);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Colors";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -349,55 +363,55 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(35, 256);
+            this.label12.Location = new System.Drawing.Point(35, 285);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(107, 13);
-            this.label12.TabIndex = 18;
+            this.label12.TabIndex = 20;
             this.label12.Text = "Popup item separator";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 227);
+            this.label11.Location = new System.Drawing.Point(35, 256);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(101, 13);
-            this.label11.TabIndex = 16;
+            this.label11.TabIndex = 18;
             this.label11.Text = "Popup item focused";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(35, 198);
+            this.label10.Location = new System.Drawing.Point(35, 227);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(71, 13);
-            this.label10.TabIndex = 14;
+            this.label10.TabIndex = 16;
             this.label10.Text = "Popup border";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(35, 169);
+            this.label9.Location = new System.Drawing.Point(35, 198);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(98, 13);
-            this.label9.TabIndex = 12;
+            this.label9.TabIndex = 14;
             this.label9.Text = "Popup background";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(35, 140);
+            this.label8.Location = new System.Drawing.Point(35, 169);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(138, 13);
-            this.label8.TabIndex = 10;
+            this.label8.TabIndex = 12;
             this.label8.Text = "Unread notification item text";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(35, 111);
+            this.label7.Location = new System.Drawing.Point(35, 140);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
-            this.label7.TabIndex = 8;
+            this.label7.TabIndex = 10;
             this.label7.Text = "Notification item text";
             // 
             // label6
@@ -429,55 +443,55 @@
             // 
             // separatorButton
             // 
-            this.separatorButton.Location = new System.Drawing.Point(6, 251);
+            this.separatorButton.Location = new System.Drawing.Point(6, 280);
             this.separatorButton.Name = "separatorButton";
             this.separatorButton.Size = new System.Drawing.Size(23, 23);
-            this.separatorButton.TabIndex = 17;
+            this.separatorButton.TabIndex = 19;
             this.separatorButton.UseVisualStyleBackColor = true;
             this.separatorButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // focusedButton
             // 
-            this.focusedButton.Location = new System.Drawing.Point(6, 222);
+            this.focusedButton.Location = new System.Drawing.Point(6, 251);
             this.focusedButton.Name = "focusedButton";
             this.focusedButton.Size = new System.Drawing.Size(23, 23);
-            this.focusedButton.TabIndex = 15;
+            this.focusedButton.TabIndex = 17;
             this.focusedButton.UseVisualStyleBackColor = true;
             this.focusedButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // borderButton
             // 
-            this.borderButton.Location = new System.Drawing.Point(6, 193);
+            this.borderButton.Location = new System.Drawing.Point(6, 222);
             this.borderButton.Name = "borderButton";
             this.borderButton.Size = new System.Drawing.Size(23, 23);
-            this.borderButton.TabIndex = 13;
+            this.borderButton.TabIndex = 15;
             this.borderButton.UseVisualStyleBackColor = true;
             this.borderButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // backgroundButton
             // 
-            this.backgroundButton.Location = new System.Drawing.Point(6, 164);
+            this.backgroundButton.Location = new System.Drawing.Point(6, 193);
             this.backgroundButton.Name = "backgroundButton";
             this.backgroundButton.Size = new System.Drawing.Size(23, 23);
-            this.backgroundButton.TabIndex = 11;
+            this.backgroundButton.TabIndex = 13;
             this.backgroundButton.UseVisualStyleBackColor = true;
             this.backgroundButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // activeTextButton
             // 
-            this.activeTextButton.Location = new System.Drawing.Point(6, 135);
+            this.activeTextButton.Location = new System.Drawing.Point(6, 164);
             this.activeTextButton.Name = "activeTextButton";
             this.activeTextButton.Size = new System.Drawing.Size(23, 23);
-            this.activeTextButton.TabIndex = 9;
+            this.activeTextButton.TabIndex = 11;
             this.activeTextButton.UseVisualStyleBackColor = true;
             this.activeTextButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // textButton
             // 
-            this.textButton.Location = new System.Drawing.Point(6, 106);
+            this.textButton.Location = new System.Drawing.Point(6, 135);
             this.textButton.Name = "textButton";
             this.textButton.Size = new System.Drawing.Size(23, 23);
-            this.textButton.TabIndex = 7;
+            this.textButton.TabIndex = 9;
             this.textButton.UseVisualStyleBackColor = true;
             this.textButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
@@ -581,7 +595,7 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(35, 324);
+            this.okButton.Location = new System.Drawing.Point(35, 352);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 1;
@@ -593,7 +607,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(116, 324);
+            this.cancelButton.Location = new System.Drawing.Point(116, 352);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 2;
@@ -604,7 +618,7 @@
             // applyButton
             // 
             this.applyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.applyButton.Location = new System.Drawing.Point(197, 324);
+            this.applyButton.Location = new System.Drawing.Point(197, 352);
             this.applyButton.Name = "applyButton";
             this.applyButton.Size = new System.Drawing.Size(75, 23);
             this.applyButton.TabIndex = 3;
@@ -612,15 +626,23 @@
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
-            // accountAlertsCheckBox
+            // countColorButton
             // 
-            this.accountAlertsCheckBox.AutoSize = true;
-            this.accountAlertsCheckBox.Location = new System.Drawing.Point(6, 226);
-            this.accountAlertsCheckBox.Name = "accountAlertsCheckBox";
-            this.accountAlertsCheckBox.Size = new System.Drawing.Size(95, 17);
-            this.accountAlertsCheckBox.TabIndex = 10;
-            this.accountAlertsCheckBox.Text = "Account Alerts";
-            this.accountAlertsCheckBox.UseVisualStyleBackColor = true;
+            this.countColorButton.Location = new System.Drawing.Point(6, 106);
+            this.countColorButton.Name = "countColorButton";
+            this.countColorButton.Size = new System.Drawing.Size(23, 23);
+            this.countColorButton.TabIndex = 7;
+            this.countColorButton.UseVisualStyleBackColor = true;
+            this.countColorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(35, 111);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Notification count";
             // 
             // SettingsForm
             // 
@@ -628,7 +650,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(284, 359);
+            this.ClientSize = new System.Drawing.Size(284, 387);
             this.Controls.Add(this.applyButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
@@ -704,6 +726,8 @@
         private System.Windows.Forms.Button resetbutton;
         private System.Windows.Forms.CheckBox singleIconCheckBox;
         private System.Windows.Forms.CheckBox accountAlertsCheckBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button countColorButton;
     }
 }
 

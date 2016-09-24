@@ -298,5 +298,17 @@ namespace SteamNotificationsTray.Properties {
                 this["AlwaysShowAccountAlerts"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color NotificationCountColor {
+            get {
+                return ((global::System.Drawing.Color)(this["NotificationCountColor"]));
+            }
+            set {
+                this["NotificationCountColor"] = value;
+            }
+        }
     }
 }
