@@ -322,5 +322,17 @@ namespace SteamNotificationsTray.Properties {
                 this["EnableAntiFlapping"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool OpenLinksOnBalloonClick {
+            get {
+                return ((bool)(this["OpenLinksOnBalloonClick"]));
+            }
+            set {
+                this["OpenLinksOnBalloonClick"] = value;
+            }
+        }
     }
 }

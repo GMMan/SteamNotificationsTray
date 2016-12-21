@@ -80,6 +80,7 @@ namespace SteamNotificationsTray
             countIcon.MouseDown += notifyIcon_MouseDown;
             countIcon.MouseClick += notifyIcon_MouseClick;
             countIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
+            countIcon.BalloonTipClicked += countIcon_BalloonTipClicked;
 
             // If no cookies available, show login form
             //CredentialStore.ClearCredentials();
@@ -208,6 +209,7 @@ namespace SteamNotificationsTray
                         AsyncGames = counts.AsyncGames - prev.AsyncGames,
                         ModeratorMessages = counts.ModeratorMessages - prev.ModeratorMessages,
                         HelpRequestReplies = counts.HelpRequestReplies - prev.HelpRequestReplies,
+                        AccountAlerts = counts.AccountAlerts - prev.AccountAlerts,
                         TotalNotifications = counts.TotalNotifications - prev.TotalNotifications,
                     };
                 }
@@ -296,6 +298,7 @@ namespace SteamNotificationsTray
                         if (countsDiff.AsyncGames > 0) notifications.Add(countsDiff.AsyncGames == 1 ? Properties.Resources.AsyncGamesSingular : string.Format(Properties.Resources.AsyncGamesPlural, countsDiff.AsyncGames));
                         if (countsDiff.ModeratorMessages > 0) notifications.Add(countsDiff.ModeratorMessages == 1 ? Properties.Resources.ModeratorMessagesSingular : string.Format(Properties.Resources.ModeratorMessagesPlural, countsDiff.ModeratorMessages));
                         if (countsDiff.HelpRequestReplies > 0) notifications.Add(countsDiff.HelpRequestReplies == 1 ? Properties.Resources.HelpRequestRepliesSingular : string.Format(Properties.Resources.HelpRequestRepliesPlural, countsDiff.HelpRequestReplies));
+                        if (countsDiff.AccountAlerts > 0) notifications.Add(countsDiff.AccountAlerts == 1 ? Properties.Resources.AccountAlertsSingular : string.Format(Properties.Resources.AccountAlertsPlural, countsDiff.AccountAlerts));
 
                         if (notifications.Count > 0)
                         {
@@ -316,6 +319,23 @@ namespace SteamNotificationsTray
             catch (Exception ex)
             {
                 markException(Properties.Resources.Exception + ex.Message);
+            }
+        }
+
+        void countIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.OpenLinksOnBalloonClick && countsDiff != null)
+            {
+                if (countsDiff.Comments > 0) commentsMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.Items > 0) itemsMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.Invites > 0) invitesMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.Gifts > 0) giftsMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.OfflineMessages > 0) offlineMessagesMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.TradeOffers > 0) tradeOffersMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.AsyncGames > 0) asyncGameMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.ModeratorMessages > 0) moderatorMessageMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.HelpRequestReplies > 0) helpRequestReplyMenuItem_Click(sender, EventArgs.Empty);
+                if (countsDiff.AccountAlerts > 0) accountAlertReplyMenuItem_Click(sender, EventArgs.Empty);
             }
         }
 

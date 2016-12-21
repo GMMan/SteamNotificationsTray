@@ -41,6 +41,7 @@ namespace SteamNotificationsTray
             // Load general settings
             intervalNumericUpDown.Value = settings.RefreshInterval / 1000;
             enableBalloonsCheckBox.Checked = settings.EnableBalloons;
+            openLinksOnBalloonClickCheckBox.Checked = settings.OpenLinksOnBalloonClick;
             singleIconCheckBox.Checked = settings.SingleIcon;
             enableAntiFlappingCheckBox.Checked = settings.EnableAntiFlapping;
 
@@ -110,6 +111,7 @@ namespace SteamNotificationsTray
             // Set general settings
             settings.RefreshInterval = (int)intervalNumericUpDown.Value * 1000;
             settings.EnableBalloons = enableBalloonsCheckBox.Checked;
+            settings.OpenLinksOnBalloonClick = openLinksOnBalloonClickCheckBox.Checked;
             settings.SingleIcon = singleIconCheckBox.Checked;
             settings.EnableAntiFlapping = enableAntiFlappingCheckBox.Checked;
 
