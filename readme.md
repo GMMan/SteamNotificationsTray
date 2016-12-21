@@ -24,6 +24,8 @@ General
   from 1 second to 1 day.
 - **Enable balloon notifications:** show a balloon notification when there
   are (more) new notifications since the last check.
+- **Open links to new items on clicking balloon:** click on the balloon popup
+  to open the pages associated with the items listed in the popup.
 - **Single icon mode:** show only the count when there are unread notifications
   instead of both the count and mail icon.
 - **Enable anti-flapping (experimental):** when Steam Community is down for
