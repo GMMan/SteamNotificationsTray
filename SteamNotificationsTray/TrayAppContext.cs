@@ -35,6 +35,15 @@ namespace SteamNotificationsTray
         {
             NotifyIcon_ShowContextMenu = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance);
 
+            // Upgrade settings first
+            var settings = Properties.Settings.Default;
+            if (!settings.SettingsUpgraded)
+            {
+                settings.Upgrade();
+                settings.SettingsUpgraded = true;
+                settings.Save();
+            }
+
             loginMenuItem = new MenuItem(Properties.Resources.LogIn, (sender, e) =>
             {
                 promptLogin();
@@ -62,7 +71,7 @@ namespace SteamNotificationsTray
 
             setupNotificationsPopup();
 
-            refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
+            refreshTimer.Interval = settings.RefreshInterval;
             refreshTimer.Tick += refreshTimer_Tick;
 
             // Must do this true/false charade to get context menus associated for some reason
