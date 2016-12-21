@@ -12,6 +12,28 @@ namespace SteamNotificationsTray
 {
     static class CredentialStore
     {
+        static int failedAuthCount;
+        static int maxFailedAuthsBeforeClear = 10;
+
+        public static int MaxFailedAuthsBeforeClear
+        {
+            get { return maxFailedAuthsBeforeClear; }
+            set { maxFailedAuthsBeforeClear = value; }
+        }
+
+        public static void NotifyAuthAttempt(bool success)
+        {
+            if (success)
+                failedAuthCount = 0;
+            else
+                ++failedAuthCount;
+        }
+
+        public static bool ShouldClearAuth()
+        {
+            return failedAuthCount >= maxFailedAuthsBeforeClear;
+        }
+
         static byte[] GetStrongNameKey()
         {
             var assembly = System.Reflection.Assembly.GetEntryAssembly();
@@ -49,6 +71,7 @@ namespace SteamNotificationsTray
             string cryptedParams = Convert.ToBase64String(cryptedBlob);
             Properties.Settings.Default.Credentials = cryptedParams;
             Properties.Settings.Default.Save();
+            NotifyAuthAttempt(true);
         }
 
         internal static CookieContainer GetCommunityCookies()

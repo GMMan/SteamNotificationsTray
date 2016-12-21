@@ -138,14 +138,20 @@ namespace SteamNotificationsTray
             try
             {
                 NotificationCounts counts = await client.PollNotificationCountsAsync();
-                if (counts != null) updateUi(counts);
+                if (counts != null)
+                {
+                    CredentialStore.NotifyAuthAttempt(true);
+                    updateUi(counts);
+                }
             }
             catch (System.Net.Http.HttpRequestException ex)
             {
                 if (ex.Message.Contains("401"))
                 {
                     // Login info expired
-                    logOut();
+                    CredentialStore.NotifyAuthAttempt(false);
+                    if (CredentialStore.ShouldClearAuth())
+                        logOut();
                 }
                 else
                 {
