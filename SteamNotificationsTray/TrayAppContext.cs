@@ -22,6 +22,7 @@ namespace SteamNotificationsTray
         NotificationsClient client = new NotificationsClient();
         bool newNotifAcknowledged;
         bool hasNotifications;
+        bool isLoggedIn;
         MethodInfo NotifyIcon_ShowContextMenu;
         NotificationCounts countsDiff;
 
@@ -116,6 +117,8 @@ namespace SteamNotificationsTray
             loginMenuItem.Visible = false;
             refreshMenuItem.Visible = true;
 
+            isLoggedIn = true;
+
             // Set main icon visible
             ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
             mainIcon.Visible = true;
@@ -158,6 +161,7 @@ namespace SteamNotificationsTray
         void logOut()
         {
             refreshTimer.Stop();
+            isLoggedIn = false;
             client.SetCookies(null);
             Properties.Settings.Default.Credentials = null;
             Properties.Settings.Default.Save();
@@ -320,17 +324,20 @@ namespace SteamNotificationsTray
         {
             if (e.Button == MouseButtons.Left)
             {
-                if (hasNotifications)
+                if (isLoggedIn)
                 {
-                    // Make icon normal colored
-                    newNotifAcknowledged = true;
-                    ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
-                    string text = client.CurrentCounts.TotalNotifications.ToString();
-                    ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point),
-                        Properties.Settings.Default.NotificationCountColor, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
-                }
+                    if (hasNotifications)
+                    {
+                        // Make icon normal colored
+                        newNotifAcknowledged = true;
+                        ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationActive, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+                        string text = client.CurrentCounts.TotalNotifications.ToString();
+                        ReplaceNotifyIcon(countIcon, IconUtils.CreateIconWithText(text, new Font("Arial", 10 - text.Length, FontStyle.Regular, GraphicsUnit.Point),
+                            Properties.Settings.Default.NotificationCountColor, Properties.Settings.Default.InboxAvailableColor, SystemInformation.SmallIconSize));
+                    }
 
-                if (sender is NotifyIcon && refreshTimer.Enabled) NotifyIcon_ShowContextMenu.Invoke(sender, null);
+                    if (sender is NotifyIcon) NotifyIcon_ShowContextMenu.Invoke(sender, null);
+                }
             }
         }
 
@@ -347,7 +354,8 @@ namespace SteamNotificationsTray
             refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
             updatePopupColors();
             updateUi(client.CurrentCounts);
-            if (!refreshTimer.Enabled)
+            // TODO: this logic should probably go into updateUi()
+            if (!isLoggedIn)
             {
                 // Logged out, hide count and show main
                 countIcon.Visible = false;
@@ -358,7 +366,6 @@ namespace SteamNotificationsTray
         void settingsForm_LoggingOut(object sender, EventArgs e)
         {
             logOut();
-            client.SetCookies(null);
         }
 
         protected override void ExitThreadCore()
