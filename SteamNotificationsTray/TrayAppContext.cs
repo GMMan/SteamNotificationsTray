@@ -26,6 +26,11 @@ namespace SteamNotificationsTray
         MethodInfo NotifyIcon_ShowContextMenu;
         NotificationCounts countsDiff;
 
+        // Experimental: try to prevent flapping when Steam Community is down, where
+        // it returns zero notifications one poll, then the proper numbers the next poll
+        int updatesSinceLastNonZeroNotificationsCount;
+        int updatesUntilSetCountsToZero = 2;
+
         public TrayAppContext()
         {
             NotifyIcon_ShowContextMenu = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -123,6 +128,9 @@ namespace SteamNotificationsTray
             ReplaceNotifyIcon(mainIcon, IconUtils.CreateIconWithBackground(Properties.Resources.NotificationDefault, Properties.Settings.Default.InboxNoneColor, SystemInformation.SmallIconSize));
             mainIcon.Visible = true;
 
+            // Need this to force initial update if counts are zero
+            updatesSinceLastNonZeroNotificationsCount = updatesUntilSetCountsToZero;
+
             // Set up timer and fire
             refreshTimer.Start();
             updateNotifications();
@@ -202,6 +210,22 @@ namespace SteamNotificationsTray
                         HelpRequestReplies = counts.HelpRequestReplies - prev.HelpRequestReplies,
                         TotalNotifications = counts.TotalNotifications - prev.TotalNotifications,
                     };
+                }
+
+                // Experimental anti-flapping: don't set counts to zero unless we have updatesUntilSetCountsToZero
+                // of confirmed polls with zero notifications
+                if (Properties.Settings.Default.EnableAntiFlapping)
+                {
+                    if (counts.TotalNotifications > 0)
+                    {
+                        updatesSinceLastNonZeroNotificationsCount = 0;
+                    }
+                    else
+                    {
+                        ++updatesSinceLastNonZeroNotificationsCount;
+                        if (updatesSinceLastNonZeroNotificationsCount < updatesUntilSetCountsToZero)
+                            return;
+                    }
                 }
 
                 updatePopupCounts(counts);

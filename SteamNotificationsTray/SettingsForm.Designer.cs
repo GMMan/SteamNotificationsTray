@@ -50,6 +50,8 @@
             this.commentsCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.countColorButton = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -78,8 +80,7 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.countColorButton = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
+            this.enableAntiFlappingCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intervalNumericUpDown)).BeginInit();
@@ -106,6 +107,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.enableAntiFlappingCheckBox);
             this.tabPage1.Controls.Add(this.singleIconCheckBox);
             this.tabPage1.Controls.Add(this.resetbutton);
             this.tabPage1.Controls.Add(this.logoutButton);
@@ -115,7 +117,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(252, 280);
+            this.tabPage1.Size = new System.Drawing.Size(252, 308);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -214,7 +216,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(252, 280);
+            this.tabPage2.Size = new System.Drawing.Size(252, 308);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Items";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -359,6 +361,24 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Colors";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(35, 111);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Notification count";
+            // 
+            // countColorButton
+            // 
+            this.countColorButton.Location = new System.Drawing.Point(6, 106);
+            this.countColorButton.Name = "countColorButton";
+            this.countColorButton.Size = new System.Drawing.Size(23, 23);
+            this.countColorButton.TabIndex = 7;
+            this.countColorButton.UseVisualStyleBackColor = true;
+            this.countColorButton.Click += new System.EventHandler(this.colorButton_Click);
             // 
             // label12
             // 
@@ -541,7 +561,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(252, 280);
+            this.tabPage4.Size = new System.Drawing.Size(252, 308);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "About";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -626,23 +646,15 @@
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
-            // countColorButton
+            // enableAntiFlapCheckBox
             // 
-            this.countColorButton.Location = new System.Drawing.Point(6, 106);
-            this.countColorButton.Name = "countColorButton";
-            this.countColorButton.Size = new System.Drawing.Size(23, 23);
-            this.countColorButton.TabIndex = 7;
-            this.countColorButton.UseVisualStyleBackColor = true;
-            this.countColorButton.Click += new System.EventHandler(this.colorButton_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(35, 111);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(90, 13);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "Notification count";
+            this.enableAntiFlappingCheckBox.AutoSize = true;
+            this.enableAntiFlappingCheckBox.Location = new System.Drawing.Point(6, 78);
+            this.enableAntiFlappingCheckBox.Name = "enableAntiFlapCheckBox";
+            this.enableAntiFlappingCheckBox.Size = new System.Drawing.Size(187, 17);
+            this.enableAntiFlappingCheckBox.TabIndex = 6;
+            this.enableAntiFlappingCheckBox.Text = "Enable anti-flapping (experimental)";
+            this.enableAntiFlappingCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -728,6 +740,7 @@
         private System.Windows.Forms.CheckBox accountAlertsCheckBox;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button countColorButton;
+        private System.Windows.Forms.CheckBox enableAntiFlappingCheckBox;
     }
 }
 

@@ -310,5 +310,17 @@ namespace SteamNotificationsTray.Properties {
                 this["NotificationCountColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableAntiFlapping {
+            get {
+                return ((bool)(this["EnableAntiFlapping"]));
+            }
+            set {
+                this["EnableAntiFlapping"] = value;
+            }
+        }
     }
 }

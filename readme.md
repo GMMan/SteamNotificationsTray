@@ -26,6 +26,11 @@ General
   are (more) new notifications since the last check.
 - **Single icon mode:** show only the count when there are unread notifications
   instead of both the count and mail icon.
+- **Enable anti-flapping (experimental):** when Steam Community is down for
+  maintenance, it often returns zero notifications one poll, then the proper
+  count the next poll. This can get annoying if you have balloon popups
+  enabled. This feature attempts to reduce that, by requiring a few zero-
+  notifications polls before actually setting notification counts to zero.
 - **Reset:** resets settings to defaults.
 - **Log Out:** clears authentication tokens and stops checking for
   notifications.
