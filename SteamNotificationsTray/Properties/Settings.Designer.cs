@@ -346,5 +346,17 @@ namespace SteamNotificationsTray.Properties {
                 this["SettingsUpgraded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseSteamBrowserProtocolLinks {
+            get {
+                return ((bool)(this["UseSteamBrowserProtocolLinks"]));
+            }
+            set {
+                this["UseSteamBrowserProtocolLinks"] = value;
+            }
+        }
     }
 }

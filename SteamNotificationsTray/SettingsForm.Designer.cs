@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.openLinksOnBalloonClickCheckBox = new System.Windows.Forms.CheckBox();
             this.enableAntiFlappingCheckBox = new System.Windows.Forms.CheckBox();
             this.singleIconCheckBox = new System.Windows.Forms.CheckBox();
             this.resetbutton = new System.Windows.Forms.Button();
@@ -81,7 +82,7 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.openLinksOnBalloonClickCheckBox = new System.Windows.Forms.CheckBox();
+            this.openInSteamCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intervalNumericUpDown)).BeginInit();
@@ -108,6 +109,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.openInSteamCheckBox);
             this.tabPage1.Controls.Add(this.openLinksOnBalloonClickCheckBox);
             this.tabPage1.Controls.Add(this.enableAntiFlappingCheckBox);
             this.tabPage1.Controls.Add(this.singleIconCheckBox);
@@ -124,23 +126,33 @@
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // openLinksOnBalloonClickCheckBox
+            // 
+            this.openLinksOnBalloonClickCheckBox.AutoSize = true;
+            this.openLinksOnBalloonClickCheckBox.Location = new System.Drawing.Point(6, 78);
+            this.openLinksOnBalloonClickCheckBox.Name = "openLinksOnBalloonClickCheckBox";
+            this.openLinksOnBalloonClickCheckBox.Size = new System.Drawing.Size(229, 17);
+            this.openLinksOnBalloonClickCheckBox.TabIndex = 4;
+            this.openLinksOnBalloonClickCheckBox.Text = "Open links to new items on clicking balloon";
+            this.openLinksOnBalloonClickCheckBox.UseVisualStyleBackColor = true;
+            // 
             // enableAntiFlappingCheckBox
             // 
             this.enableAntiFlappingCheckBox.AutoSize = true;
-            this.enableAntiFlappingCheckBox.Location = new System.Drawing.Point(6, 101);
+            this.enableAntiFlappingCheckBox.Location = new System.Drawing.Point(6, 124);
             this.enableAntiFlappingCheckBox.Name = "enableAntiFlappingCheckBox";
             this.enableAntiFlappingCheckBox.Size = new System.Drawing.Size(187, 17);
-            this.enableAntiFlappingCheckBox.TabIndex = 5;
+            this.enableAntiFlappingCheckBox.TabIndex = 6;
             this.enableAntiFlappingCheckBox.Text = "Enable anti-flapping (experimental)";
             this.enableAntiFlappingCheckBox.UseVisualStyleBackColor = true;
             // 
             // singleIconCheckBox
             // 
             this.singleIconCheckBox.AutoSize = true;
-            this.singleIconCheckBox.Location = new System.Drawing.Point(6, 78);
+            this.singleIconCheckBox.Location = new System.Drawing.Point(6, 101);
             this.singleIconCheckBox.Name = "singleIconCheckBox";
             this.singleIconCheckBox.Size = new System.Drawing.Size(107, 17);
-            this.singleIconCheckBox.TabIndex = 4;
+            this.singleIconCheckBox.TabIndex = 5;
             this.singleIconCheckBox.Text = "Single icon mode";
             this.singleIconCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -150,7 +162,7 @@
             this.resetbutton.Location = new System.Drawing.Point(90, 279);
             this.resetbutton.Name = "resetbutton";
             this.resetbutton.Size = new System.Drawing.Size(75, 23);
-            this.resetbutton.TabIndex = 6;
+            this.resetbutton.TabIndex = 7;
             this.resetbutton.Text = "Reset";
             this.resetbutton.UseVisualStyleBackColor = true;
             this.resetbutton.Click += new System.EventHandler(this.resetbutton_Click);
@@ -161,7 +173,7 @@
             this.logoutButton.Location = new System.Drawing.Point(171, 279);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(75, 23);
-            this.logoutButton.TabIndex = 7;
+            this.logoutButton.TabIndex = 8;
             this.logoutButton.Text = "Log Out";
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
@@ -195,10 +207,10 @@
             this.enableBalloonsCheckBox.AutoSize = true;
             this.enableBalloonsCheckBox.Checked = true;
             this.enableBalloonsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.enableBalloonsCheckBox.Location = new System.Drawing.Point(6, 32);
+            this.enableBalloonsCheckBox.Location = new System.Drawing.Point(6, 55);
             this.enableBalloonsCheckBox.Name = "enableBalloonsCheckBox";
             this.enableBalloonsCheckBox.Size = new System.Drawing.Size(155, 17);
-            this.enableBalloonsCheckBox.TabIndex = 2;
+            this.enableBalloonsCheckBox.TabIndex = 3;
             this.enableBalloonsCheckBox.Text = "Enable balloon notifications";
             this.enableBalloonsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -658,15 +670,15 @@
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
             // 
-            // openLinksOnBalloonClickCheckBox
+            // openInSteamCheckBox
             // 
-            this.openLinksOnBalloonClickCheckBox.AutoSize = true;
-            this.openLinksOnBalloonClickCheckBox.Location = new System.Drawing.Point(6, 55);
-            this.openLinksOnBalloonClickCheckBox.Name = "openLinksOnBalloonClickCheckBox";
-            this.openLinksOnBalloonClickCheckBox.Size = new System.Drawing.Size(229, 17);
-            this.openLinksOnBalloonClickCheckBox.TabIndex = 3;
-            this.openLinksOnBalloonClickCheckBox.Text = "Open links to new items on clicking balloon";
-            this.openLinksOnBalloonClickCheckBox.UseVisualStyleBackColor = true;
+            this.openInSteamCheckBox.AutoSize = true;
+            this.openInSteamCheckBox.Location = new System.Drawing.Point(6, 32);
+            this.openInSteamCheckBox.Name = "openInSteamCheckBox";
+            this.openInSteamCheckBox.Size = new System.Drawing.Size(120, 17);
+            this.openInSteamCheckBox.TabIndex = 2;
+            this.openInSteamCheckBox.Text = "Open links in Steam";
+            this.openInSteamCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -754,6 +766,7 @@
         private System.Windows.Forms.Button countColorButton;
         private System.Windows.Forms.CheckBox enableAntiFlappingCheckBox;
         private System.Windows.Forms.CheckBox openLinksOnBalloonClickCheckBox;
+        private System.Windows.Forms.CheckBox openInSteamCheckBox;
     }
 }
 

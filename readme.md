@@ -22,6 +22,8 @@ General
 -------
 - **Refresh interval:** how often to refresh the notifications count. Ranges
   from 1 second to 1 day.
+- **Open links in Steam:** self-explanatory; opens notifications in the Steam
+  client instead of the browser.
 - **Enable balloon notifications:** show a balloon notification when there
   are (more) new notifications since the last check.
 - **Open links to new items on clicking balloon:** click on the balloon popup

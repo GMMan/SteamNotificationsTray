@@ -127,51 +127,81 @@ namespace SteamNotificationsTray
 
         void commentsMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/commentnotifications/");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/CommentNotifications");
+            else
+                Process.Start("https://steamcommunity.com/my/commentnotifications/");
         }
 
         void itemsMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/inventory/");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/CommunityInventory");
+            else
+                Process.Start("https://steamcommunity.com/my/inventory/");
         }
 
         void invitesMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/home/invites/");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/SteamIDInvitesPage");
+            else
+                Process.Start("https://steamcommunity.com/my/home/invites/");
         }
 
         void giftsMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/inventory/#pending_gifts");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/ManageGiftsPage");
+            else
+                Process.Start("https://steamcommunity.com/my/inventory/#pending_gifts");
         }
 
         void offlineMessagesMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/chat/");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                // Web chat has a friends list, so we open the Friends window here
+                Process.Start("steam://open/friends");
+            else
+                Process.Start("https://steamcommunity.com/chat/");
         }
 
         void tradeOffersMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/tradeoffers/");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/TradeOffers");
+            else
+                Process.Start("https://steamcommunity.com/my/tradeoffers/");
         }
 
         void asyncGameMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/gamenotifications");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/AsyncGames");
+            else
+                Process.Start("https://steamcommunity.com/my/gamenotifications");
         }
 
         void moderatorMessageMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://steamcommunity.com/my/moderatormessages");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/ModeratorMessages");
+            else
+                Process.Start("https://steamcommunity.com/my/moderatormessages");
         }
 
         void helpRequestReplyMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("https://help.steampowered.com/en/wizard/HelpRequests");
+            if (Settings.Default.UseSteamBrowserProtocolLinks)
+                Process.Start("steam://url/MyHelpRequests");
+            else
+                Process.Start("https://help.steampowered.com/en/wizard/HelpRequests");
         }
 
         void accountAlertReplyMenuItem_Click(object sender, EventArgs e)
         {
+            // No Steam Browser Protocol link needed here, because the window will remain
+            // open until the alert is dismissed. Should we open Steam or the browser?
             Process.Start("https://store.steampowered.com/supportmessages/");
         }
 
@@ -192,31 +222,31 @@ namespace SteamNotificationsTray
             itemsMenuItem.Text = counts.Items == 1 ? Resources.ItemsSingular : string.Format(Resources.ItemsPlural, counts.Items);
             itemsMenuItem.Tag = counts.Items;
             itemsSeparator.Available = itemsMenuItem.Available = counts.Items > 0 || settings.AlwaysShowItems;
- 
+
             invitesMenuItem.Text = counts.Invites == 1 ? Resources.InvitesSingular : string.Format(Resources.InvitesPlural, counts.Invites);
             invitesMenuItem.Tag = counts.Invites;
             invitesSeparator.Available = invitesMenuItem.Available = counts.Invites > 0 || settings.AlwaysShowInvites;
- 
+
             giftsMenuItem.Text = counts.Gifts == 1 ? Resources.GiftsSingular : string.Format(Resources.GiftsPlural, counts.Gifts);
             giftsMenuItem.Tag = counts.Gifts;
             giftsSeparator.Available = giftsMenuItem.Available = counts.Gifts > 0 || settings.AlwaysShowGifts;
- 
+
             offlineMessagesMenuItem.Text = counts.OfflineMessages == 1 ? Resources.OfflineMessagesSingular : string.Format(Resources.OfflineMessagesPlural, counts.OfflineMessages);
             offlineMessagesMenuItem.Tag = counts.OfflineMessages;
             offlineMessagesSeparator.Available = offlineMessagesMenuItem.Available = counts.OfflineMessages > 0 || settings.AlwaysShowOfflineMessages;
-   
+
             tradeOffersMenuItem.Text = counts.TradeOffers == 1 ? Resources.TradeOffersSingular : string.Format(Resources.TradeOffersPlural, counts.TradeOffers);
             tradeOffersMenuItem.Tag = counts.TradeOffers;
             tradeOffersSeparator.Available = tradeOffersMenuItem.Available = counts.TradeOffers > 0 || settings.AlwaysShowTradeOffers;
-    
+
             asyncGameMenuItem.Text = counts.AsyncGames == 1 ? Resources.AsyncGamesSingular : string.Format(Resources.AsyncGamesPlural, counts.AsyncGames);
             asyncGameMenuItem.Tag = counts.AsyncGames;
             asyncGameMenuSeparator.Available = asyncGameMenuItem.Available = counts.AsyncGames > 0 || settings.AlwaysShowAsyncGames;
-   
+
             moderatorMessageMenuItem.Text = counts.ModeratorMessages == 1 ? Resources.ModeratorMessagesSingular : string.Format(Resources.ModeratorMessagesPlural, counts.ModeratorMessages);
             moderatorMessageMenuItem.Tag = counts.ModeratorMessages;
             moderatorMessageSeparator.Available = moderatorMessageMenuItem.Available = counts.ModeratorMessages > 0 || settings.AlwaysShowModeratorMessages;
-    
+
             helpRequestReplyMenuItem.Text = counts.HelpRequestReplies == 1 ? Resources.HelpRequestRepliesSingular : string.Format(Resources.HelpRequestRepliesPlural, counts.HelpRequestReplies);
             helpRequestReplyMenuItem.Tag = counts.HelpRequestReplies;
             helpRequestReplySeparator.Available = helpRequestReplyMenuItem.Available = counts.HelpRequestReplies > 0 || settings.AlwaysShowHelpRequestReplies;

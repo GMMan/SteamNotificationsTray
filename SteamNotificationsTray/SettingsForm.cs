@@ -40,6 +40,7 @@ namespace SteamNotificationsTray
 
             // Load general settings
             intervalNumericUpDown.Value = settings.RefreshInterval / 1000;
+            openInSteamCheckBox.Checked = settings.UseSteamBrowserProtocolLinks;
             enableBalloonsCheckBox.Checked = settings.EnableBalloons;
             openLinksOnBalloonClickCheckBox.Checked = settings.OpenLinksOnBalloonClick;
             singleIconCheckBox.Checked = settings.SingleIcon;
@@ -110,6 +111,7 @@ namespace SteamNotificationsTray
 
             // Set general settings
             settings.RefreshInterval = (int)intervalNumericUpDown.Value * 1000;
+            settings.UseSteamBrowserProtocolLinks = openInSteamCheckBox.Checked;
             settings.EnableBalloons = enableBalloonsCheckBox.Checked;
             settings.OpenLinksOnBalloonClick = openLinksOnBalloonClickCheckBox.Checked;
             settings.SingleIcon = singleIconCheckBox.Checked;
