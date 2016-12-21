@@ -335,6 +335,27 @@ namespace SteamNotificationsTray
         {
             if (Properties.Settings.Default.OpenLinksOnBalloonClick && countsDiff != null)
             {
+                // Steam client doesn't open things in new tabs, so if we have more than one
+                // type of notification, open in browser instead.
+                bool origOpenInSteam = Properties.Settings.Default.UseSteamBrowserProtocolLinks;
+                if (origOpenInSteam)
+                {
+                    int typesOfNewNotifs = 0;
+                    if (countsDiff.Comments > 0) ++typesOfNewNotifs;
+                    if (countsDiff.Items > 0) ++typesOfNewNotifs;
+                    if (countsDiff.Invites > 0) ++typesOfNewNotifs;
+                    if (countsDiff.Gifts > 0) ++typesOfNewNotifs;
+                    if (countsDiff.OfflineMessages > 0) ++typesOfNewNotifs;
+                    if (countsDiff.TradeOffers > 0) ++typesOfNewNotifs;
+                    if (countsDiff.AsyncGames > 0) ++typesOfNewNotifs;
+                    if (countsDiff.ModeratorMessages > 0) ++typesOfNewNotifs;
+                    if (countsDiff.HelpRequestReplies > 0) ++typesOfNewNotifs;
+                    if (countsDiff.AccountAlerts > 0) ++typesOfNewNotifs;
+
+                    if (typesOfNewNotifs > 1)
+                        Properties.Settings.Default.UseSteamBrowserProtocolLinks = false;
+                }
+
                 if (countsDiff.Comments > 0) commentsMenuItem_Click(sender, EventArgs.Empty);
                 if (countsDiff.Items > 0) itemsMenuItem_Click(sender, EventArgs.Empty);
                 if (countsDiff.Invites > 0) invitesMenuItem_Click(sender, EventArgs.Empty);
@@ -345,6 +366,8 @@ namespace SteamNotificationsTray
                 if (countsDiff.ModeratorMessages > 0) moderatorMessageMenuItem_Click(sender, EventArgs.Empty);
                 if (countsDiff.HelpRequestReplies > 0) helpRequestReplyMenuItem_Click(sender, EventArgs.Empty);
                 if (countsDiff.AccountAlerts > 0) accountAlertReplyMenuItem_Click(sender, EventArgs.Empty);
+
+                Properties.Settings.Default.UseSteamBrowserProtocolLinks = origOpenInSteam;
             }
         }
 
