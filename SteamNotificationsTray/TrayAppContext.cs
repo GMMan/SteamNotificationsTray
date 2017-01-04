@@ -24,6 +24,7 @@ namespace SteamNotificationsTray
         bool hasNotifications;
         bool isLoggedIn;
         MethodInfo NotifyIcon_ShowContextMenu;
+        NotificationCounts oldCounts;
         NotificationCounts countsDiff;
 
         // Experimental: try to prevent flapping when Steam Community is down, where
@@ -200,13 +201,29 @@ namespace SteamNotificationsTray
         {
             try
             {
-                if (client.PrevCounts == null)
+                if (oldCounts == null)
                 {
                     countsDiff = new NotificationCounts();
                 }
                 else
                 {
-                    var prev = client.PrevCounts;
+                    // Experimental anti-flapping: don't set counts to zero unless we have updatesUntilSetCountsToZero
+                    // of confirmed polls with zero notifications
+                    if (Properties.Settings.Default.EnableAntiFlapping)
+                    {
+                        if (counts.TotalNotifications > 0)
+                        {
+                            updatesSinceLastNonZeroNotificationsCount = 0;
+                        }
+                        else
+                        {
+                            ++updatesSinceLastNonZeroNotificationsCount;
+                            if (updatesSinceLastNonZeroNotificationsCount < updatesUntilSetCountsToZero)
+                                return;
+                        }
+                    }
+
+                    var prev = oldCounts;
                     countsDiff = new NotificationCounts
                     {
                         Comments = counts.Comments - prev.Comments,
@@ -223,22 +240,6 @@ namespace SteamNotificationsTray
                     };
                 }
 
-                // Experimental anti-flapping: don't set counts to zero unless we have updatesUntilSetCountsToZero
-                // of confirmed polls with zero notifications
-                if (Properties.Settings.Default.EnableAntiFlapping)
-                {
-                    if (counts.TotalNotifications > 0)
-                    {
-                        updatesSinceLastNonZeroNotificationsCount = 0;
-                    }
-                    else
-                    {
-                        ++updatesSinceLastNonZeroNotificationsCount;
-                        if (updatesSinceLastNonZeroNotificationsCount < updatesUntilSetCountsToZero)
-                            return;
-                    }
-                }
-
                 updatePopupCounts(counts);
                 mainIcon.Text = Application.ProductName;
                 countIcon.Text = string.Format(counts.TotalNotifications == 1 ? Properties.Resources.UnreadNotificationsSingular : Properties.Resources.UnreadNotificationsPlural, counts.TotalNotifications);
@@ -253,7 +254,6 @@ namespace SteamNotificationsTray
                 else
                 {
                     hasNotifications = true;
-                    NotificationCounts oldCounts = client.PrevCounts;
                     Color newColor;
                     if (oldCounts == null)
                     {
@@ -323,6 +323,8 @@ namespace SteamNotificationsTray
                             countIcon.ShowBalloonTip(10000); // Per MSDN, timeout doesn't make a difference (since Vista)
                         }
                     }
+
+                    oldCounts = counts;
                 }
             }
             catch (Exception ex)
