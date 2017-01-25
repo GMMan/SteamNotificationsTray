@@ -323,9 +323,9 @@ namespace SteamNotificationsTray
                             countIcon.ShowBalloonTip(10000); // Per MSDN, timeout doesn't make a difference (since Vista)
                         }
                     }
-
-                    oldCounts = counts;
                 }
+
+                oldCounts = counts;
             }
             catch (Exception ex)
             {
@@ -437,7 +437,7 @@ namespace SteamNotificationsTray
         {
             refreshTimer.Interval = Properties.Settings.Default.RefreshInterval;
             updatePopupColors();
-            updateUi(client.CurrentCounts);
+            updateUi(oldCounts ?? client.CurrentCounts);
             // TODO: this logic should probably go into updateUi()
             if (!isLoggedIn)
             {
