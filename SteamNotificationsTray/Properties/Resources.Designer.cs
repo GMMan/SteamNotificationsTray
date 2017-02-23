@@ -415,6 +415,15 @@ namespace SteamNotificationsTray.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mute balloons temporarily.
+        /// </summary>
+        internal static string TempMute {
+            get {
+                return ResourceManager.GetString("TempMute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} new trade notifications.
         /// </summary>
         internal static string TradeOffersPlural {
