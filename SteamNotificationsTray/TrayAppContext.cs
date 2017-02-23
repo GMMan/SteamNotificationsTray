@@ -18,11 +18,13 @@ namespace SteamNotificationsTray
         ContextMenu appContextMenu;
         MenuItem loginMenuItem;
         MenuItem refreshMenuItem;
+        MenuItem muteMenuItem;
         Timer refreshTimer = new Timer();
         NotificationsClient client = new NotificationsClient();
         bool newNotifAcknowledged;
         bool hasNotifications;
         bool isLoggedIn;
+        bool muted;
         MethodInfo NotifyIcon_ShowContextMenu;
         NotificationCounts oldCounts;
         NotificationCounts countsDiff;
@@ -53,10 +55,16 @@ namespace SteamNotificationsTray
             {
                 updateNotifications();
             });
+            muteMenuItem = new MenuItem(Properties.Resources.TempMute, (sender, e) =>
+            {
+                muted = !muted;
+                muteMenuItem.Checked = muted;
+            }) { Visible = settings.EnableBalloons };
 
             appContextMenu = new ContextMenu(new MenuItem[] {
                 loginMenuItem,
                 refreshMenuItem,
+                muteMenuItem,
                 new MenuItem(Properties.Resources.Settings, (sender, e) =>
                 {
                     var settingsForm = new SettingsForm();
@@ -295,7 +303,7 @@ namespace SteamNotificationsTray
                     }
                     mainIcon.Visible = !Properties.Settings.Default.SingleIcon;
 
-                    if (Properties.Settings.Default.EnableBalloons)
+                    if (Properties.Settings.Default.EnableBalloons && !muted)
                     {
                         List<string> notifications = new List<string>();
                         if (countsDiff.Comments > 0) notifications.Add(countsDiff.Comments == 1 ? Properties.Resources.CommentsSingular : string.Format(Properties.Resources.CommentsPlural, countsDiff.Comments));
@@ -445,6 +453,7 @@ namespace SteamNotificationsTray
                 countIcon.Visible = false;
                 mainIcon.Visible = true;
             }
+            muteMenuItem.Visible = Properties.Settings.Default.EnableBalloons;
         }
 
         void settingsForm_LoggingOut(object sender, EventArgs e)
