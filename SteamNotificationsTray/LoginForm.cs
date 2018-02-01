@@ -113,6 +113,20 @@ namespace SteamNotificationsTray
                 mobileAuthPanel.Visible = loginResponse.RequiresTwoFactor;
                 captchaPanel.Visible = loginResponse.CaptchaNeeded || loginResponse.IsBadCaptcha;
                 if (loginResponse.ClearPasswordField) passwordTextBox.Text = string.Empty;
+
+                // Default focus fields when additional info required
+                if (emailCodePanel.Visible)
+                {
+                    emailAuthTextBox.Focus();
+                }
+                else if (mobileAuthPanel.Visible)
+                {
+                    mobileAuthTextBox.Focus();
+                }
+                else if (captchaPanel.Visible)
+                {
+                    captchaTextBox.Focus();
+                }
             }
         }
 
