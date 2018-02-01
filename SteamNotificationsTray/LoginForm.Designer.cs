@@ -62,9 +62,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.Size = new System.Drawing.Size(77, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             // 
@@ -72,17 +73,19 @@
             // 
             this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.usernameTextBox.Location = new System.Drawing.Point(12, 25);
+            this.usernameTextBox.Location = new System.Drawing.Point(16, 31);
+            this.usernameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(250, 20);
+            this.usernameTextBox.Size = new System.Drawing.Size(332, 22);
             this.usernameTextBox.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 48);
+            this.label2.Location = new System.Drawing.Point(16, 59);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(73, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Password:";
             // 
@@ -90,9 +93,10 @@
             // 
             this.passwordTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.passwordTextBox.Location = new System.Drawing.Point(12, 64);
+            this.passwordTextBox.Location = new System.Drawing.Point(16, 79);
+            this.passwordTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(250, 20);
+            this.passwordTextBox.Size = new System.Drawing.Size(332, 22);
             this.passwordTextBox.TabIndex = 3;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
@@ -109,7 +113,8 @@
             this.mainLayoutPanel.Controls.Add(this.messageLabel, 0, 0);
             this.mainLayoutPanel.Controls.Add(this.mobileAuthPanel, 0, 2);
             this.mainLayoutPanel.Controls.Add(this.captchaPanel, 0, 3);
-            this.mainLayoutPanel.Location = new System.Drawing.Point(6, 90);
+            this.mainLayoutPanel.Location = new System.Drawing.Point(8, 111);
+            this.mainLayoutPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainLayoutPanel.Name = "mainLayoutPanel";
             this.mainLayoutPanel.RowCount = 5;
             this.mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -117,7 +122,7 @@
             this.mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.mainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.mainLayoutPanel.Size = new System.Drawing.Size(262, 303);
+            this.mainLayoutPanel.Size = new System.Drawing.Size(349, 371);
             this.mainLayoutPanel.TabIndex = 4;
             // 
             // buttonsPanel
@@ -126,18 +131,20 @@
             this.buttonsPanel.Controls.Add(this.cancelButton);
             this.buttonsPanel.Controls.Add(this.loginButton);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonsPanel.Location = new System.Drawing.Point(3, 271);
+            this.buttonsPanel.Location = new System.Drawing.Point(4, 331);
+            this.buttonsPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonsPanel.Name = "buttonsPanel";
-            this.buttonsPanel.Size = new System.Drawing.Size(256, 29);
-            this.buttonsPanel.TabIndex = 0;
+            this.buttonsPanel.Size = new System.Drawing.Size(341, 36);
+            this.buttonsPanel.TabIndex = 4;
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(178, 3);
+            this.cancelButton.Location = new System.Drawing.Point(237, 4);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.Size = new System.Drawing.Size(100, 28);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -146,9 +153,10 @@
             // loginButton
             // 
             this.loginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.loginButton.Location = new System.Drawing.Point(97, 3);
+            this.loginButton.Location = new System.Drawing.Point(129, 4);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.Size = new System.Drawing.Size(100, 28);
             this.loginButton.TabIndex = 0;
             this.loginButton.Text = "Sign in";
             this.loginButton.UseVisualStyleBackColor = true;
@@ -163,9 +171,10 @@
             this.emailCodePanel.Controls.Add(this.label3);
             this.emailCodePanel.Controls.Add(this.emailAuthTextBox);
             this.emailCodePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.emailCodePanel.Location = new System.Drawing.Point(3, 22);
+            this.emailCodePanel.Location = new System.Drawing.Point(4, 29);
+            this.emailCodePanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.emailCodePanel.Name = "emailCodePanel";
-            this.emailCodePanel.Size = new System.Drawing.Size(256, 78);
+            this.emailCodePanel.Size = new System.Drawing.Size(341, 94);
             this.emailCodePanel.TabIndex = 1;
             this.emailCodePanel.Visible = false;
             // 
@@ -173,26 +182,29 @@
             // 
             this.friendlyNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.friendlyNameTextBox.Location = new System.Drawing.Point(3, 55);
+            this.friendlyNameTextBox.Location = new System.Drawing.Point(4, 68);
+            this.friendlyNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.friendlyNameTextBox.Name = "friendlyNameTextBox";
-            this.friendlyNameTextBox.Size = new System.Drawing.Size(250, 20);
-            this.friendlyNameTextBox.TabIndex = 5;
+            this.friendlyNameTextBox.Size = new System.Drawing.Size(332, 22);
+            this.friendlyNameTextBox.TabIndex = 3;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 39);
+            this.label5.Location = new System.Drawing.Point(4, 48);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 13);
-            this.label5.TabIndex = 4;
+            this.label5.Size = new System.Drawing.Size(103, 17);
+            this.label5.TabIndex = 2;
             this.label5.Text = "Friendly Name:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Location = new System.Drawing.Point(4, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 13);
+            this.label3.Size = new System.Drawing.Size(133, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Steam Guard Code:";
             // 
@@ -201,20 +213,22 @@
             this.emailAuthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailAuthTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.emailAuthTextBox.Location = new System.Drawing.Point(3, 16);
+            this.emailAuthTextBox.Location = new System.Drawing.Point(4, 20);
+            this.emailAuthTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.emailAuthTextBox.Name = "emailAuthTextBox";
-            this.emailAuthTextBox.Size = new System.Drawing.Size(250, 20);
-            this.emailAuthTextBox.TabIndex = 3;
+            this.emailAuthTextBox.Size = new System.Drawing.Size(332, 22);
+            this.emailAuthTextBox.TabIndex = 1;
             // 
             // messageLabel
             // 
             this.messageLabel.AutoSize = true;
             this.messageLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(51)))), ((int)(((byte)(0)))));
-            this.messageLabel.Location = new System.Drawing.Point(3, 0);
+            this.messageLabel.Location = new System.Drawing.Point(4, 0);
+            this.messageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.messageLabel.Name = "messageLabel";
-            this.messageLabel.Padding = new System.Windows.Forms.Padding(3);
-            this.messageLabel.Size = new System.Drawing.Size(59, 19);
-            this.messageLabel.TabIndex = 2;
+            this.messageLabel.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.messageLabel.Size = new System.Drawing.Size(76, 25);
+            this.messageLabel.TabIndex = 0;
             this.messageLabel.Text = "Message!";
             this.messageLabel.Visible = false;
             // 
@@ -225,10 +239,11 @@
             this.mobileAuthPanel.Controls.Add(this.mobileAuthTextBox);
             this.mobileAuthPanel.Controls.Add(this.label4);
             this.mobileAuthPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mobileAuthPanel.Location = new System.Drawing.Point(3, 106);
+            this.mobileAuthPanel.Location = new System.Drawing.Point(4, 131);
+            this.mobileAuthPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mobileAuthPanel.Name = "mobileAuthPanel";
-            this.mobileAuthPanel.Size = new System.Drawing.Size(256, 39);
-            this.mobileAuthPanel.TabIndex = 3;
+            this.mobileAuthPanel.Size = new System.Drawing.Size(341, 46);
+            this.mobileAuthPanel.TabIndex = 2;
             this.mobileAuthPanel.Visible = false;
             // 
             // mobileAuthTextBox
@@ -236,17 +251,19 @@
             this.mobileAuthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mobileAuthTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.mobileAuthTextBox.Location = new System.Drawing.Point(3, 16);
+            this.mobileAuthTextBox.Location = new System.Drawing.Point(4, 20);
+            this.mobileAuthTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mobileAuthTextBox.Name = "mobileAuthTextBox";
-            this.mobileAuthTextBox.Size = new System.Drawing.Size(250, 20);
+            this.mobileAuthTextBox.Size = new System.Drawing.Size(332, 22);
             this.mobileAuthTextBox.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Location = new System.Drawing.Point(4, 0);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 13);
+            this.label4.Size = new System.Drawing.Size(178, 17);
             this.label4.TabIndex = 0;
             this.label4.Text = "Mobile Authenticator Code:";
             // 
@@ -259,28 +276,31 @@
             this.captchaPanel.Controls.Add(this.captchaPictureBox);
             this.captchaPanel.Controls.Add(this.label6);
             this.captchaPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.captchaPanel.Location = new System.Drawing.Point(3, 151);
+            this.captchaPanel.Location = new System.Drawing.Point(4, 185);
+            this.captchaPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.captchaPanel.Name = "captchaPanel";
-            this.captchaPanel.Size = new System.Drawing.Size(256, 114);
-            this.captchaPanel.TabIndex = 4;
+            this.captchaPanel.Size = new System.Drawing.Size(341, 138);
+            this.captchaPanel.TabIndex = 3;
             this.captchaPanel.Visible = false;
             // 
             // captchaTextBox
             // 
             this.captchaTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.captchaTextBox.Location = new System.Drawing.Point(3, 91);
+            this.captchaTextBox.Location = new System.Drawing.Point(4, 112);
+            this.captchaTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.captchaTextBox.Name = "captchaTextBox";
-            this.captchaTextBox.Size = new System.Drawing.Size(250, 20);
-            this.captchaTextBox.TabIndex = 3;
+            this.captchaTextBox.Size = new System.Drawing.Size(332, 22);
+            this.captchaTextBox.TabIndex = 2;
             // 
             // captchaRefreshButton
             // 
             this.captchaRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.captchaRefreshButton.Location = new System.Drawing.Point(156, 62);
+            this.captchaRefreshButton.Location = new System.Drawing.Point(208, 76);
+            this.captchaRefreshButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.captchaRefreshButton.Name = "captchaRefreshButton";
-            this.captchaRefreshButton.Size = new System.Drawing.Size(75, 23);
-            this.captchaRefreshButton.TabIndex = 2;
+            this.captchaRefreshButton.Size = new System.Drawing.Size(100, 28);
+            this.captchaRefreshButton.TabIndex = 1;
             this.captchaRefreshButton.Text = "Refresh";
             this.captchaRefreshButton.UseVisualStyleBackColor = true;
             this.captchaRefreshButton.Click += new System.EventHandler(this.captchaRefreshButton_Click);
@@ -289,30 +309,32 @@
             // 
             this.captchaPictureBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.captchaPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.captchaPictureBox.Location = new System.Drawing.Point(25, 16);
+            this.captchaPictureBox.Location = new System.Drawing.Point(33, 20);
+            this.captchaPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.captchaPictureBox.Name = "captchaPictureBox";
-            this.captchaPictureBox.Size = new System.Drawing.Size(206, 40);
+            this.captchaPictureBox.Size = new System.Drawing.Size(274, 49);
             this.captchaPictureBox.TabIndex = 1;
             this.captchaPictureBox.TabStop = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Location = new System.Drawing.Point(4, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 13);
+            this.label6.Size = new System.Drawing.Size(194, 17);
             this.label6.TabIndex = 0;
             this.label6.Text = "Type these characters below:";
             // 
             // LoginForm
             // 
             this.AcceptButton = this.loginButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(274, 394);
+            this.ClientSize = new System.Drawing.Size(365, 485);
             this.Controls.Add(this.mainLayoutPanel);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.label2);
@@ -320,6 +342,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.Text = "Log into Steam";
