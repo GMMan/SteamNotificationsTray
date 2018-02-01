@@ -200,6 +200,7 @@
             // 
             this.emailAuthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailAuthTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.emailAuthTextBox.Location = new System.Drawing.Point(3, 16);
             this.emailAuthTextBox.Name = "emailAuthTextBox";
             this.emailAuthTextBox.Size = new System.Drawing.Size(250, 20);
@@ -234,6 +235,7 @@
             // 
             this.mobileAuthTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.mobileAuthTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.mobileAuthTextBox.Location = new System.Drawing.Point(3, 16);
             this.mobileAuthTextBox.Name = "mobileAuthTextBox";
             this.mobileAuthTextBox.Size = new System.Drawing.Size(250, 20);
