@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.openInSteamCheckBox = new System.Windows.Forms.CheckBox();
             this.openLinksOnBalloonClickCheckBox = new System.Windows.Forms.CheckBox();
             this.enableAntiFlappingCheckBox = new System.Windows.Forms.CheckBox();
             this.singleIconCheckBox = new System.Windows.Forms.CheckBox();
@@ -82,7 +83,6 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.applyButton = new System.Windows.Forms.Button();
-            this.openInSteamCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.intervalNumericUpDown)).BeginInit();
@@ -124,7 +124,16 @@
             this.tabPage1.Size = new System.Drawing.Size(252, 308);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // openInSteamCheckBox
+            // 
+            this.openInSteamCheckBox.AutoSize = true;
+            this.openInSteamCheckBox.Location = new System.Drawing.Point(6, 32);
+            this.openInSteamCheckBox.Name = "openInSteamCheckBox";
+            this.openInSteamCheckBox.Size = new System.Drawing.Size(120, 17);
+            this.openInSteamCheckBox.TabIndex = 2;
+            this.openInSteamCheckBox.Text = "Open links in Steam";
+            this.openInSteamCheckBox.UseVisualStyleBackColor = true;
             // 
             // openLinksOnBalloonClickCheckBox
             // 
@@ -243,7 +252,6 @@
             this.tabPage2.Size = new System.Drawing.Size(252, 308);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Items";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // accountAlertsCheckBox
             // 
@@ -384,7 +392,6 @@
             this.tabPage3.Size = new System.Drawing.Size(252, 308);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Colors";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
@@ -588,7 +595,6 @@
             this.tabPage4.Size = new System.Drawing.Size(252, 308);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "About";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // copyrightLabel
             // 
@@ -669,16 +675,6 @@
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = true;
             this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
-            // 
-            // openInSteamCheckBox
-            // 
-            this.openInSteamCheckBox.AutoSize = true;
-            this.openInSteamCheckBox.Location = new System.Drawing.Point(6, 32);
-            this.openInSteamCheckBox.Name = "openInSteamCheckBox";
-            this.openInSteamCheckBox.Size = new System.Drawing.Size(120, 17);
-            this.openInSteamCheckBox.TabIndex = 2;
-            this.openInSteamCheckBox.Text = "Open links in Steam";
-            this.openInSteamCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
